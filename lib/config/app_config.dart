@@ -1,4 +1,4 @@
-import 'package:demy_teachers/config/environment.dart';
+import 'package:demy_teachers/config/environment/environment.dart';
 
 class AppConfig {
   final Environment environment;
@@ -16,13 +16,13 @@ class AppConfig {
       case Environment.dev:
         return const AppConfig(
           environment: Environment.dev,
-          baseUrl: 'https://dev.api.demy.app',
+          baseUrl: 'http://10.0.2.2:8080/api/v1',
           enableLogging: true,
         );
       case Environment.prod:
         return const AppConfig(
           environment: Environment.prod,
-          baseUrl: 'https://api.demy.app',
+          baseUrl: 'https://nistra-demy.up.railway.app/api/v1',
           enableLogging: false,
         );
     }
