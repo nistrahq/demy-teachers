@@ -26,8 +26,8 @@ import 'package:demy_teachers/features/auth/data/datasources/auth_remote_data_so
 import 'package:demy_teachers/features/auth/data/di/auth_module.dart' as _i75;
 import 'package:demy_teachers/features/auth/domain/repositories/auth_repository.dart'
     as _i604;
-import 'package:demy_teachers/features/auth/domain/usecases/sign_in_user.dart'
-    as _i859;
+import 'package:demy_teachers/features/auth/domain/usecases/sign_in_use_case.dart'
+    as _i87;
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_bloc.dart'
     as _i536;
 import 'package:demy_teachers/features/splash/presentation/blocs/splash_bloc.dart'
@@ -70,7 +70,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i85.AuthRemoteDataSource>(),
       ),
     );
-    gh.lazySingleton<_i859.SignInUser>(
+    gh.lazySingleton<_i87.SignInUser>(
       () => authModule.signInUser(gh<_i604.AuthRepository>()),
     );
     gh.factory<_i871.SplashBloc>(
@@ -78,7 +78,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i536.AuthBloc>(
       () => authModule.authBloc(
-        gh<_i859.SignInUser>(),
+        gh<_i87.SignInUser>(),
         gh<_i604.AuthRepository>(),
       ),
     );

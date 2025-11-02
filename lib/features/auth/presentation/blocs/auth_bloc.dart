@@ -1,5 +1,5 @@
 import 'package:demy_teachers/features/auth/domain/repositories/auth_repository.dart';
-import 'package:demy_teachers/features/auth/domain/usecases/sign_in_user.dart';
+import 'package:demy_teachers/features/auth/domain/usecases/sign_in_use_case.dart';
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_event.dart';
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
