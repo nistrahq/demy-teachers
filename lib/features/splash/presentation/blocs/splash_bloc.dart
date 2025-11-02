@@ -18,8 +18,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   ) async {
     emit(SplashLoading());
     await Future.delayed(const Duration(seconds: 2));
-    final token = await repository.getCachedToken();
-    if (token != null && token.isNotEmpty) {
+    final cachedUser = await repository.getCachedUserEntity();
+    if (cachedUser != null) {
       emit(SplashNavigateToHome());
     } else {
       emit(SplashNavigateToLogin());
