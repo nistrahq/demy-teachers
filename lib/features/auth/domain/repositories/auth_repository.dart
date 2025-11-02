@@ -7,5 +7,9 @@ abstract class AuthRepository {
 
   Future<String?> getCachedToken();
 
+  Future<Map<String, String?>> getCachedUser();
+
+  Future<User?> getCachedUserEntity();
+
   Future<void> signOut();
 }

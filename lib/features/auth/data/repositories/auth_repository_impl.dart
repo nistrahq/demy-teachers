@@ -17,6 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
     return safeCall(() async {
       final user = await remoteDataSource.signIn(email, password);
       await localDataSource.saveToken(user.token);
+      await localDataSource.saveUser(id: user.id, email: user.email);
       return user;
     });
   }
@@ -27,7 +28,30 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Map<String, String?>> getCachedUser() async {
+    return await localDataSource.getUser();
+  }
+
+  @override
+  Future<User?> getCachedUserEntity() async {
+    final userData = await localDataSource.getUser();
+    final token = await localDataSource.getToken();
+
+    final id = userData['id'];
+    final email = userData['email'];
+
+    if (id == null || email == null || token == null) return null;
+
+    return User(
+      id: int.parse(id),
+      email: email,
+      token: token,
+    );
+  }
+
+  @override
   Future<void> signOut() async {
     await localDataSource.clearToken();
+    await localDataSource.clearUser();
   }
 }
