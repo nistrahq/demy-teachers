@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:demy_teachers/core/errors/failure.dart';
 import 'package:demy_teachers/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:demy_teachers/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:demy_teachers/features/auth/domain/entities/user.dart';
@@ -10,10 +12,16 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.localDataSource, this.remoteDataSource);
 
   @override
-  Future<User> signIn(String email, String password) async {
-    final user = await remoteDataSource.signIn(email, password);
-    await localDataSource.saveToken(user.token);
-    return user;
+  Future<Either<Failure, User>> signIn(String email, String password) async {
+    try {
+      final user = await remoteDataSource.signIn(email, password);
+      await localDataSource.saveToken(user.token);
+      return Right(user);
+    } on Failure catch (failure) {
+      return Left(failure);
+    } catch (_) {
+      return const Left(UnknownFailure('Unexpected error'));
+    }
   }
 
   @override
