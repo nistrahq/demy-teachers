@@ -5,17 +5,17 @@ abstract class Failure {
 
 class ServerFailure extends Failure {
   final int? statusCode;
-  const ServerFailure(String message, {this.statusCode}) : super(message);
+  const ServerFailure(super.message, {this.statusCode});
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure(String message) : super(message);
+  const NetworkFailure(super.message);
 }
 
 class TimeoutFailure extends Failure {
-  const TimeoutFailure(String message) : super(message);
+  const TimeoutFailure(super.message);
 }
 
 class UnknownFailure extends Failure {
-  const UnknownFailure(String message) : super(message);
+  const UnknownFailure(super.message);
 }
