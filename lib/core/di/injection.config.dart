@@ -14,6 +14,8 @@ import 'package:demy_teachers/config/app_config.dart' as _i0;
 import 'package:demy_teachers/core/network/api_client.dart' as _i552;
 import 'package:demy_teachers/core/network/interceptors/auth_interceptor.dart'
     as _i811;
+import 'package:demy_teachers/core/network/interceptors/language_interceptor.dart'
+    as _i338;
 import 'package:demy_teachers/core/network/interceptors/logging_interceptor.dart'
     as _i589;
 import 'package:demy_teachers/core/network/network_info.dart' as _i316;
@@ -47,13 +49,16 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
     final authModule = _$AuthModule();
-    gh.factory<_i589.LoggingInterceptor>(() => _i589.LoggingInterceptor());
+    gh.factory<_i338.LanguageInterceptor>(() => _i338.LanguageInterceptor());
     gh.lazySingleton<_i0.AppConfig>(() => networkModule.appConfig());
     gh.lazySingleton<_i895.Connectivity>(() => networkModule.connectivity());
     gh.lazySingleton<_i316.NetworkInfo>(
       () => networkModule.networkInfo(gh<_i895.Connectivity>()),
     );
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio(gh<_i0.AppConfig>()));
+    gh.factory<_i589.LoggingInterceptor>(
+      () => _i589.LoggingInterceptor(gh<_i0.AppConfig>()),
+    );
     gh.lazySingleton<_i586.SessionStorage>(() => _i703.SecureStorage());
     gh.lazySingleton<_i552.ApiClient>(
       () => networkModule.apiClient(gh<_i361.Dio>()),

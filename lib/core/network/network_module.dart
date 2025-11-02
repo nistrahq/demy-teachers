@@ -4,6 +4,7 @@ import 'package:demy_teachers/config/environment/environment.dart' as app_env;
 import 'package:demy_teachers/core/di/injection.dart';
 import 'package:demy_teachers/core/network/api_client.dart';
 import 'package:demy_teachers/core/network/interceptors/auth_interceptor.dart';
+import 'package:demy_teachers/core/network/interceptors/language_interceptor.dart';
 import 'package:demy_teachers/core/network/interceptors/logging_interceptor.dart';
 import 'package:demy_teachers/core/network/network_info.dart';
 import 'package:dio/dio.dart';
@@ -30,6 +31,7 @@ abstract class NetworkModule {
       headers: {'Content-Type': 'application/json'},
     ));
 
+    dio.interceptors.add(getIt<LanguageInterceptor>());
     dio.interceptors.add(getIt<LoggingInterceptor>());
     dio.interceptors.add(getIt<AuthInterceptor>());
 
