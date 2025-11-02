@@ -14,10 +14,12 @@ class BottomNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return NavigationBar(
       selectedIndex: currentIndex,
       onDestinationSelected: onTap,
+      indicatorColor: colorScheme.secondaryFixed,
       destinations: [
         NavigationDestination(
           icon: const Icon(Icons.person_outline),
