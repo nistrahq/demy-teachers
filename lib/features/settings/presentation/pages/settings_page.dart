@@ -23,13 +23,13 @@ class SettingsPage extends StatelessWidget {
               Icon(
                 Icons.settings_rounded,
                 size: 120,
-                color: colorScheme.primary.withOpacity(0.3),
+                color: colorScheme.primary.withValues(alpha: 0.3),
               ),
               const SizedBox(height: 24),
               Text(
                 loc.settingsPagePlaceholder,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: colorScheme.onSurface.withOpacity(0.6),
+                      color: colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                 textAlign: TextAlign.center,
               ),
