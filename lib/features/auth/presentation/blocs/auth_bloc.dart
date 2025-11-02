@@ -22,14 +22,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     emit(AuthLoading());
 
-    try {
-      final user = await signInUser(
-        SignInParams(email: event.email, password: event.password),
-      );
-      emit(AuthAuthenticated(user));
-    } catch (e) {
-      emit(AuthFailure('Login failed: ${e.toString()}'));
-    }
+    final result = await signInUser(
+      SignInParams(email: event.email, password: event.password),
+    );
+
+    result.fold(
+      (failure) => emit(AuthFailure(failure.message)),
+      (user) => emit(AuthAuthenticated(user)),
+    );
   }
 
   Future<void> _onSignOutRequested(
