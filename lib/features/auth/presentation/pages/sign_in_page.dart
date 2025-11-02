@@ -1,4 +1,3 @@
-import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_state.dart';
 import 'package:demy_teachers/features/auth/presentation/widgets/sign_in_form.dart';
@@ -13,7 +12,6 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final loc = AppLocalizations.of(context);
 
     return Scaffold(
       backgroundColor: colorScheme.primaryContainer,
@@ -43,25 +41,7 @@ class SignInPage extends StatelessWidget {
                         height: 120,
                         fit: BoxFit.contain,
                       ),
-                      const SizedBox(height: 24),
-                      Text(
-                        loc.signInTitle,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
-                            ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        loc.signInSubtitle,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: Colors.white70),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 48),
                       const SignInForm(),
                       if (state is AuthLoading)
                         const Padding(

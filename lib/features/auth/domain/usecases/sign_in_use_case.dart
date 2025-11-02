@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:demy_teachers/core/errors/failure.dart';
 import 'package:demy_teachers/core/usecases/usecase.dart';
 import 'package:demy_teachers/features/auth/domain/entities/user.dart';
 import 'package:demy_teachers/features/auth/domain/repositories/auth_repository.dart';
@@ -12,13 +14,13 @@ class SignInParams {
   });
 }
 
-class SignInUser implements UseCase<User, SignInParams> {
+class SignInUser implements UseCase<Either<Failure, User>, SignInParams> {
   final AuthRepository repository;
 
   SignInUser(this.repository);
 
   @override
-  Future<User> call(SignInParams params) async {
-    return await repository.signIn(params.email, params.password);
+  Future<Either<Failure, User>> call(SignInParams params) {
+    return repository.signIn(params.email, params.password);
   }
 }

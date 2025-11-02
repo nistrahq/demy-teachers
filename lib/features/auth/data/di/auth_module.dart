@@ -8,7 +8,7 @@ import 'package:demy_teachers/features/auth/data/datasources/auth_remote_data_so
 import 'package:demy_teachers/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:demy_teachers/features/auth/data/services/auth_token_provider.dart';
 import 'package:demy_teachers/features/auth/domain/repositories/auth_repository.dart';
-import 'package:demy_teachers/features/auth/domain/usecases/sign_in_user.dart';
+import 'package:demy_teachers/features/auth/domain/usecases/sign_in_use_case.dart';
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:injectable/injectable.dart';
 

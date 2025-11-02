@@ -16,7 +16,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
     final request = SignInRequestDto(email: email, password: password);
     final response = await apiClient.post(AuthEndpoints.signIn, body: request.toJson());
     final dto = SignInResponseDto.fromJson(response.data);
-    final user = UserMapper.fromDto(dto);
-    return user;
+    return UserMapper.fromDto(dto);
   }
 }

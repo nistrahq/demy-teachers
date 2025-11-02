@@ -1,3 +1,6 @@
+import 'package:dartz/dartz.dart';
+import 'package:demy_teachers/core/errors/failure.dart';
+import 'package:demy_teachers/core/utils/safe_call.dart';
 import 'package:demy_teachers/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:demy_teachers/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:demy_teachers/features/auth/domain/entities/user.dart';
@@ -10,10 +13,13 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.localDataSource, this.remoteDataSource);
 
   @override
-  Future<User> signIn(String email, String password) async {
-    final user = await remoteDataSource.signIn(email, password);
-    await localDataSource.saveToken(user.token);
-    return user;
+  Future<Either<Failure, User>> signIn(String email, String password) async {
+    return safeCall(() async {
+      final user = await remoteDataSource.signIn(email, password);
+      await localDataSource.saveToken(user.token);
+      await localDataSource.saveUser(id: user.id, email: user.email);
+      return user;
+    });
   }
 
   @override
@@ -22,7 +28,30 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Map<String, String?>> getCachedUser() async {
+    return await localDataSource.getUser();
+  }
+
+  @override
+  Future<User?> getCachedUserEntity() async {
+    final userData = await localDataSource.getUser();
+    final token = await localDataSource.getToken();
+
+    final id = userData['id'];
+    final email = userData['email'];
+
+    if (id == null || email == null || token == null) return null;
+
+    return User(
+      id: int.parse(id),
+      email: email,
+      token: token,
+    );
+  }
+
+  @override
   Future<void> signOut() async {
     await localDataSource.clearToken();
+    await localDataSource.clearUser();
   }
 }

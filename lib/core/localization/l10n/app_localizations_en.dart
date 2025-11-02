@@ -41,4 +41,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get passwordRequired => 'Password is required';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get homePageTitle => 'Welcome to Demy Teachers';
+
+  @override
+  String get homePagePlaceholder => 'Home content coming soon...';
+
+  @override
+  String get profilePageTitle => 'My Profile';
+
+  @override
+  String get profilePagePlaceholder => 'Profile information coming soon...';
+
+  @override
+  String get settingsPageTitle => 'Settings';
+
+  @override
+  String get settingsPagePlaceholder => 'Settings options coming soon...';
 }
