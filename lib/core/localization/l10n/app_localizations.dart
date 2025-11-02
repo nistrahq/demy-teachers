@@ -163,6 +163,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password is required'**
   String get passwordRequired;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @homePageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Demy Teachers'**
+  String get homePageTitle;
+
+  /// No description provided for @homePagePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Home content coming soon...'**
+  String get homePagePlaceholder;
+
+  /// No description provided for @profilePageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Profile'**
+  String get profilePageTitle;
+
+  /// No description provided for @profilePagePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile information coming soon...'**
+  String get profilePagePlaceholder;
+
+  /// No description provided for @settingsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsPageTitle;
+
+  /// No description provided for @settingsPagePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings options coming soon...'**
+  String get settingsPagePlaceholder;
 }
 
 class _AppLocalizationsDelegate

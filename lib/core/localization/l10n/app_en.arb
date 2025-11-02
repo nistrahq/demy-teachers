@@ -10,5 +10,14 @@
   "signInButton": "Sign in",
   "forgotPassword": "Forgot password?",
   "emailRequired": "Email is required",
-  "passwordRequired": "Password is required"
+  "passwordRequired": "Password is required",
+  "home": "Home",
+  "profile": "Profile",
+  "settings": "Settings",
+  "homePageTitle": "Welcome to Demy Teachers",
+  "homePagePlaceholder": "Home content coming soon...",
+  "profilePageTitle": "My Profile",
+  "profilePagePlaceholder": "Profile information coming soon...",
+  "settingsPageTitle": "Settings",
+  "settingsPagePlaceholder": "Settings options coming soon..."
 }
