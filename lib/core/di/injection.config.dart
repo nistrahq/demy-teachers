@@ -11,11 +11,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:demy_teachers/config/app_config.dart' as _i0;
-import 'package:demy_teachers/core/di/network_module.dart' as _i870;
 import 'package:demy_teachers/core/network/api_client.dart' as _i552;
-import 'package:demy_teachers/core/network/interceptors/auth_interceptors.dart'
-    as _i99;
+import 'package:demy_teachers/core/network/interceptors/auth_interceptor.dart'
+    as _i811;
+import 'package:demy_teachers/core/network/interceptors/logging_interceptor.dart'
+    as _i589;
 import 'package:demy_teachers/core/network/network_info.dart' as _i316;
+import 'package:demy_teachers/core/network/network_module.dart' as _i0;
 import 'package:demy_teachers/core/services/token_provider.dart' as _i963;
 import 'package:demy_teachers/core/storage/secure_storage.dart' as _i703;
 import 'package:demy_teachers/core/storage/session_storage.dart' as _i586;
@@ -45,6 +47,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
     final authModule = _$AuthModule();
+    gh.factory<_i589.LoggingInterceptor>(() => _i589.LoggingInterceptor());
     gh.lazySingleton<_i0.AppConfig>(() => networkModule.appConfig());
     gh.lazySingleton<_i895.Connectivity>(() => networkModule.connectivity());
     gh.lazySingleton<_i316.NetworkInfo>(
@@ -82,13 +85,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i604.AuthRepository>(),
       ),
     );
-    gh.factory<_i99.AuthInterceptor>(
-      () => _i99.AuthInterceptor(gh<_i963.TokenProvider>()),
+    gh.factory<_i811.AuthInterceptor>(
+      () => _i811.AuthInterceptor(gh<_i963.TokenProvider>()),
     );
     return this;
   }
 }
 
-class _$NetworkModule extends _i870.NetworkModule {}
+class _$NetworkModule extends _i0.NetworkModule {}
 
 class _$AuthModule extends _i75.AuthModule {}
