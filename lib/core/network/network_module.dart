@@ -1,10 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:demy_teachers/config/app_config.dart';
 import 'package:demy_teachers/config/environment/environment.dart' as app_env;
-import 'package:demy_teachers/config/logger/logger_config.dart';
 import 'package:demy_teachers/core/di/injection.dart';
 import 'package:demy_teachers/core/network/api_client.dart';
-import 'package:demy_teachers/core/network/interceptors/auth_interceptors.dart';
+import 'package:demy_teachers/core/network/interceptors/auth_interceptor.dart';
+import 'package:demy_teachers/core/network/interceptors/logging_interceptor.dart';
 import 'package:demy_teachers/core/network/network_info.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -30,13 +30,8 @@ abstract class NetworkModule {
       headers: {'Content-Type': 'application/json'},
     ));
 
+    dio.interceptors.add(getIt<LoggingInterceptor>());
     dio.interceptors.add(getIt<AuthInterceptor>());
-    dio.interceptors.add(LogInterceptor(
-      request: true,
-      requestBody: true,
-      responseBody: true,
-      logPrint: (obj) => LoggerConfig.log(obj),
-    ));
 
     return dio;
   }
