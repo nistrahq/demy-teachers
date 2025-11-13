@@ -5,26 +5,48 @@ import 'package:demy_teachers/features/schedule/presentation/widgets/schedule_bo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+
 
 class TeachingSchedulePage extends StatelessWidget {
   const TeachingSchedulePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // 1. Inyecta el BLoC y lanza el evento inicial
+    final Color primaryColor = Theme.of(context).colorScheme.primary;
+
     return BlocProvider(
       create: (_) => GetIt.I<ScheduleBloc>()..add(ScheduleWeeklyScheduleRequested()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Teaching Schedule'),
+          
+          backgroundColor: primaryColor,
+          elevation: 4, // Añadir sombra ligera
           centerTitle: true,
-          // El icono de flecha atrás se hereda o lo maneja el GoRouter
+          
+          // Título blanco
+          title: const Text(
+            'Teaching Schedule',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          
+          // Botón de retroceso al Home
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              context.go('/home');
+            },
+          ),
         ),
+        
         body: const Column(
           children: [
-            DaySelectionBar(), // Usa el widget de barra de días
+            DaySelectionBar(),
             Expanded(
-              child: ScheduleBody(), // Usa el widget de cuerpo de horario
+              child: ScheduleBody(),
             ),
           ],
         ),
