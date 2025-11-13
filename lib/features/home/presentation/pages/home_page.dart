@@ -1,6 +1,9 @@
 import 'package:demy_teachers/features/home/presentation/widgets/quick_access_card.dart';
-import 'package:demy_teachers/features/home/presentation/widgets/today_schedule_home.dart'; // 🎯 Importar el nuevo componente
+import 'package:demy_teachers/features/home/presentation/widgets/today_schedule_home.dart';
+import 'package:demy_teachers/features/profile/presentation/blocs/profile_bloc.dart';
+import 'package:demy_teachers/features/profile/presentation/blocs/profile_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,7 +12,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    const teacherName = 'Paul Salim Crispin Vilca'; 
 
     return Scaffold(
       body: CustomScrollView(
@@ -17,12 +19,12 @@ class HomePage extends StatelessWidget {
           // --- 1. Header Fijo (Fondo azul/morado) ---
           SliverToBoxAdapter(
             child: Container(
-              padding: const EdgeInsets.fromLTRB(16.0, 48.0, 16.0, 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
               color: colorScheme.primaryContainer, 
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  // Bloque de Perfil (Paul Salim Crispin Vilca)
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       const CircleAvatar(
@@ -31,25 +33,28 @@ class HomePage extends StatelessWidget {
                         backgroundColor: Colors.white,
                       ),
                       const SizedBox(width: 12),
-                      Text(
-                        teacherName,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                      BlocBuilder<ProfileBloc, ProfileState>(
+                        builder: (context, state) {
+                          String name = 'Usuario';
+                          if (state is ProfileLoaded) name = state.teacher.fullName;
+                          if (state is ProfileLoading) name = 'Loading...';
+
+                          return Text(
+                            name,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                          );
+                        },
                       ),
                     ],
                   ),
-                  const SizedBox(height: 15),
-                  
-                  
-                  
                 ],
               ),
             ),
           ),
           
-          // 🎯 2. SLIVER DE TARJETAS DE ACCESO RÁPIDO (DEBAJO DEL ÁREA AZUL)
           SliverToBoxAdapter(
             child: Padding(
               // Padding superior normal (20.0) para un margen de separación del header azul.
@@ -70,7 +75,6 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                // ❌ Ya no necesitamos IntrinsicHeight ni Transform.translate.
                 child: Row( 
                   children: [
                     Expanded(
@@ -112,17 +116,18 @@ class HomePage extends StatelessWidget {
           // --- 3. Agenda del Día (Today Schedule Header) ---
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0, bottom: 8.0),
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0, bottom: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Today Schedule', 
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   TextButton(
                     onPressed: () => context.go('/teaching-schedule'),
-                    child: Text('View all >', style: TextStyle(color: colorScheme.primary)),
+                    child: Text('View all >', 
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: colorScheme.primary)),
                   ),
                 ],
               ),
