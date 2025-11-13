@@ -23,10 +23,7 @@ abstract class AttendanceModule {
           AttendanceLocalDataSource local, AttendanceRemoteDataSource remote) =>
       AttendanceRepositoryImpl(localDataSource: local, remoteDataSource: remote);
 
-  // Si tienes un AttendanceBloc, regístralo aquí igual que en AuthModule:
-  // @injectable
-  // AttendanceBloc attendanceBloc(AttendanceRepository repo) => AttendanceBloc(repo);
-
+  
     // UseCase provider
   @lazySingleton
   
