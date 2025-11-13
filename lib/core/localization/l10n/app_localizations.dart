@@ -217,6 +217,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings options coming soon...'**
   String get settingsPagePlaceholder;
+
+  /// Label for attendance registration button
+  ///
+  /// In en, this message translates to:
+  /// **'Take Attendance'**
+  String get registerAttendanceButtonLabel;
 }
 
 class _AppLocalizationsDelegate

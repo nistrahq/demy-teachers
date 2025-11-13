@@ -23,6 +23,18 @@ import 'package:demy_teachers/core/network/network_module.dart' as _i0;
 import 'package:demy_teachers/core/services/token_provider.dart' as _i963;
 import 'package:demy_teachers/core/storage/secure_storage.dart' as _i703;
 import 'package:demy_teachers/core/storage/session_storage.dart' as _i586;
+import 'package:demy_teachers/features/attendance/data/datasources/attendance_local_data_source.dart'
+    as _i219;
+import 'package:demy_teachers/features/attendance/data/datasources/attendance_remote_data_source.dart'
+    as _i750;
+import 'package:demy_teachers/features/attendance/data/di/attendance_module.dart'
+    as _i642;
+import 'package:demy_teachers/features/attendance/domain/repositories/attendance_repository.dart'
+    as _i175;
+import 'package:demy_teachers/features/attendance/domain/usecases/submit_class_attendance_use_case.dart'
+    as _i849;
+import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_bloc.dart'
+    as _i703;
 import 'package:demy_teachers/features/auth/data/datasources/auth_local_data_source.dart'
     as _i883;
 import 'package:demy_teachers/features/auth/data/datasources/auth_remote_data_source.dart'
@@ -48,10 +60,14 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
+    final attendanceModule = _$AttendanceModule();
     final authModule = _$AuthModule();
     gh.factory<_i338.LanguageInterceptor>(() => _i338.LanguageInterceptor());
     gh.lazySingleton<_i0.AppConfig>(() => networkModule.appConfig());
     gh.lazySingleton<_i895.Connectivity>(() => networkModule.connectivity());
+    gh.lazySingleton<_i219.AttendanceLocalDataSource>(
+      () => attendanceModule.attendanceLocalDataSource(),
+    );
     gh.lazySingleton<_i316.NetworkInfo>(
       () => networkModule.networkInfo(gh<_i895.Connectivity>()),
     );
@@ -63,11 +79,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i552.ApiClient>(
       () => networkModule.apiClient(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i750.AttendanceRemoteDataSource>(
+      () => attendanceModule.attendanceRemoteDataSource(gh<_i552.ApiClient>()),
+    );
     gh.lazySingleton<_i85.AuthRemoteDataSource>(
       () => authModule.authRemoteDataSource(gh<_i552.ApiClient>()),
     );
     gh.lazySingleton<_i883.AuthLocalDataSource>(
       () => authModule.authLocalDataSource(gh<_i586.SessionStorage>()),
+    );
+    gh.lazySingleton<_i175.AttendanceRepository>(
+      () => attendanceModule.attendanceRepository(
+        gh<_i219.AttendanceLocalDataSource>(),
+        gh<_i750.AttendanceRemoteDataSource>(),
+      ),
     );
     gh.lazySingleton<_i963.TokenProvider>(
       () => authModule.tokenProvider(gh<_i883.AuthLocalDataSource>()),
@@ -78,11 +103,22 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i85.AuthRemoteDataSource>(),
       ),
     );
+    gh.lazySingleton<_i849.SubmitClassAttendaceUseCase>(
+      () => attendanceModule.submitClassAttendanceUseCase(
+        gh<_i175.AttendanceRepository>(),
+      ),
+    );
     gh.lazySingleton<_i87.SignInUser>(
       () => authModule.signInUser(gh<_i604.AuthRepository>()),
     );
     gh.factory<_i871.SplashBloc>(
       () => _i871.SplashBloc(gh<_i604.AuthRepository>()),
+    );
+    gh.factory<_i703.AttendanceBloc>(
+      () => attendanceModule.attendanceBloc(
+        gh<_i849.SubmitClassAttendaceUseCase>(),
+        gh<_i175.AttendanceRepository>(),
+      ),
     );
     gh.factory<_i536.AuthBloc>(
       () => authModule.authBloc(
@@ -98,5 +134,7 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$NetworkModule extends _i0.NetworkModule {}
+
+class _$AttendanceModule extends _i642.AttendanceModule {}
 
 class _$AuthModule extends _i75.AuthModule {}
