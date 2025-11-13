@@ -36,6 +36,16 @@ import 'package:demy_teachers/features/auth/domain/usecases/sign_in_use_case.dar
     as _i87;
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_bloc.dart'
     as _i536;
+import 'package:demy_teachers/features/profile/data/datasources/profile_remote_data_source.dart'
+    as _i498;
+import 'package:demy_teachers/features/profile/data/di/profile_module.dart'
+    as _i281;
+import 'package:demy_teachers/features/profile/domain/repositories/profile_repository.dart'
+    as _i43;
+import 'package:demy_teachers/features/profile/domain/usecases/get_current_teacher.dart'
+    as _i999;
+import 'package:demy_teachers/features/profile/presentation/blocs/profile_bloc.dart'
+    as _i725;
 import 'package:demy_teachers/features/schedule/data/datasources/schedule_remote_data_source.dart'
     as _i353;
 import 'package:demy_teachers/features/schedule/data/di/schedule_module.dart'
@@ -61,6 +71,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
     final authModule = _$AuthModule();
+    final profileModule = _$ProfileModule();
     final scheduleModule = _$ScheduleModule();
     gh.factory<_i338.LanguageInterceptor>(() => _i338.LanguageInterceptor());
     gh.lazySingleton<_i0.AppConfig>(() => networkModule.appConfig());
@@ -78,6 +89,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i85.AuthRemoteDataSource>(
       () => authModule.authRemoteDataSource(gh<_i552.ApiClient>()),
+    );
+    gh.lazySingleton<_i498.ProfileRemoteDataSource>(
+      () => profileModule.profileRemoteDataSource(gh<_i552.ApiClient>()),
     );
     gh.lazySingleton<_i353.ScheduleRemoteDataSource>(
       () => scheduleModule.scheduleRemoteDataSource(gh<_i552.ApiClient>()),
@@ -118,11 +132,24 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i4.ActiveUserProvider>(),
       ),
     );
+    gh.lazySingleton<_i43.ProfileRepository>(
+      () => profileModule.profileRepository(
+        gh<_i498.ProfileRemoteDataSource>(),
+        gh<_i4.ActiveUserProvider>(),
+      ),
+    );
+    gh.lazySingleton<_i999.GetCurrentTeacherUseCase>(
+      () =>
+          profileModule.getCurrentTeacherUseCase(gh<_i43.ProfileRepository>()),
+    );
     gh.lazySingleton<_i57.GetScheduleForTeacher>(
       () => scheduleModule.getSchedules(gh<_i952.ScheduleRepository>()),
     );
     gh.factory<_i460.ScheduleBloc>(
       () => scheduleModule.scheduleBloc(gh<_i57.GetScheduleForTeacher>()),
+    );
+    gh.factory<_i725.ProfileBloc>(
+      () => profileModule.profileBloc(gh<_i999.GetCurrentTeacherUseCase>()),
     );
     return this;
   }
@@ -131,5 +158,7 @@ extension GetItInjectableX on _i174.GetIt {
 class _$NetworkModule extends _i0.NetworkModule {}
 
 class _$AuthModule extends _i75.AuthModule {}
+
+class _$ProfileModule extends _i281.ProfileModule {}
 
 class _$ScheduleModule extends _i405.ScheduleModule {}
