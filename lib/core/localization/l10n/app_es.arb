@@ -19,5 +19,9 @@
   "profilePageTitle": "Mi Perfil",
   "profilePagePlaceholder": "La información del perfil estará disponible pronto...",
   "settingsPageTitle": "Configuración",
-  "settingsPagePlaceholder": "Las opciones de configuración estarán disponibles pronto..."
+  "settingsPagePlaceholder": "Las opciones de configuración estarán disponibles pronto...",
+  "registerAttendanceButtonLabel": "Registrar Asistencia",
+    "@registerAttendanceButtonLabel": {
+        "description": "Label for attendance registration button"
+    }
 }
