@@ -1,0 +1,23 @@
+{
+  "@@locale": "es",
+  "appTitle": "Demy Teachers",
+  "welcome": "Bienvenido",
+  "login": "Iniciar sesión",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "signInTitle": "Iniciar sesión",
+  "signInSubtitle": "Ingrese sus credenciales otorgadas por su administrador para continuar",
+  "signInButton": "Iniciar sesión",
+  "forgotPassword": "¿Olvidaste tu contraseña?",
+  "emailRequired": "El correo electrónico es obligatorio",
+  "passwordRequired": "La contraseña es obligatoria",
+  "home": "Inicio",
+  "profile": "Perfil",
+  "settings": "Configuración",
+  "homePageTitle": "Bienvenido a Demy Teachers",
+  "homePagePlaceholder": "El contenido del inicio estará disponible pronto...",
+  "profilePageTitle": "Mi Perfil",
+  "profilePagePlaceholder": "La información del perfil estará disponible pronto...",
+  "settingsPageTitle": "Configuración",
+  "settingsPagePlaceholder": "Las opciones de configuración estarán disponibles pronto..."
+}
