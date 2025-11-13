@@ -1,5 +1,6 @@
 import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -32,6 +33,19 @@ class HomePage extends StatelessWidget {
                       color: colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                 textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+              // Nuevo botón para navegar a attendance
+              ElevatedButton.icon(
+                onPressed: () => context.goNamed('attendance'),
+                icon: const Icon(Icons.fact_check_rounded),
+                label: Text(loc.registerAttendanceButtonLabel),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                ),
               ),
             ],
           ),
