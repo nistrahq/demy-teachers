@@ -24,10 +24,10 @@ class ScheduleBody extends StatelessWidget {
         }
         if (state is ScheduleLoaded) {
           if (state.dailySessions.isEmpty) {
-            return Center(child: Text('No hay clases programadas para ${state.selectedDay}.'));
+            return Center(child: Text('No hay clases programadas para este día.'));
           }
           return ListView.builder(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 16.0), 
             itemCount: state.dailySessions.length,
             itemBuilder: (context, index) {
               return ScheduleCard(item: state.dailySessions[index]);
