@@ -54,6 +54,10 @@ import 'package:demy_teachers/features/schedule/domain/repositories/schedule_rep
     as _i952;
 import 'package:demy_teachers/features/schedule/domain/usecases/get_schedule_for_teacher_use_case.dart'
     as _i57;
+import 'package:demy_teachers/features/schedule/domain/usecases/reschedule_class_session_use_case.dart'
+    as _i363;
+import 'package:demy_teachers/features/schedule/presentation/blocs/reschedule_bloc.dart'
+    as _i866;
 import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_bloc.dart'
     as _i460;
 import 'package:demy_teachers/features/splash/presentation/blocs/splash_bloc.dart'
@@ -145,11 +149,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i57.GetScheduleForTeacher>(
       () => scheduleModule.getSchedules(gh<_i952.ScheduleRepository>()),
     );
+    gh.lazySingleton<_i363.RescheduleClassSession>(
+      () => scheduleModule.rescheduleSession(gh<_i952.ScheduleRepository>()),
+    );
     gh.factory<_i460.ScheduleBloc>(
       () => scheduleModule.scheduleBloc(gh<_i57.GetScheduleForTeacher>()),
     );
     gh.factory<_i725.ProfileBloc>(
       () => profileModule.profileBloc(gh<_i999.GetCurrentTeacherUseCase>()),
+    );
+    gh.factory<_i866.RescheduleBloc>(
+      () => scheduleModule.rescheduleBloc(gh<_i363.RescheduleClassSession>()),
     );
     return this;
   }
