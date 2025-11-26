@@ -1,5 +1,6 @@
 import 'package:demy_teachers/features/schedule/domain/entities/class_session.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ScheduleCard extends StatelessWidget {
   final ClassSession item;
@@ -122,8 +123,15 @@ class ScheduleCard extends StatelessWidget {
                       icon: const Icon(Icons.edit_calendar_outlined),
                       color: rescheduleIconColor,
                       onPressed: () {
-                        // Acción de Navegación
-                      },
+                            // 2. Navegación pasando el ID del item actual
+                          context.pushNamed(
+                            'reschedule',
+                            pathParameters: {
+                              'sessionId': item.id.toString(),
+                            },
+                            extra: item, // <--- AQUÍ PASAMOS EL OBJETO COMPLETO
+                          );
+                        },
                     ),
                   ),
                 ],
