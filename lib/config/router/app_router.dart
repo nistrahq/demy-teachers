@@ -20,10 +20,7 @@ final GoRouter appRouter = GoRouter(
     ...scheduleRoutes,
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return BlocProvider(
-          create: (_) =>
-              GetIt.instance<ProfileBloc>()..add(const LoadProfileRequested()),
-          child: Scaffold(
+          return Scaffold(
             body: navigationShell,
             bottomNavigationBar: BottomNavigationBarWidget(
               currentIndex: navigationShell.currentIndex,
@@ -32,8 +29,7 @@ final GoRouter appRouter = GoRouter(
                 initialLocation: index == navigationShell.currentIndex,
               ),
             ),
-          ),
-        );
+          );
       },
 
       branches: [
