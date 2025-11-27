@@ -1,68 +1,30 @@
-// ...existing code...
-import 'package:equatable/equatable.dart';
+import 'package:demy_teachers/features/attendance/domain/entities/student.dart';
 
-class StudentItem {
-  final int id;
-  final String name;
-  final String dni;
-  StudentItem({required this.id, required this.name, required this.dni});
-}
+abstract class AttendanceState {}
 
-class AttendanceState extends Equatable {
-  final bool loading;
-  final DateTime date;
-  final int? selectedClassSessionId;
-  final List<StudentItem> students;
-  final List<String> statuses; // parallel list of statuses per student
-  final bool submitting;
-  final String? error;
-  final bool success;
+class AttendanceInitial extends AttendanceState {}
+class AttendanceLoading extends AttendanceState {}
 
-  const AttendanceState({
-    required this.loading,
-    required this.date,
-    required this.selectedClassSessionId,
-    required this.students,
-    required this.statuses,
-    required this.submitting,
-    this.error,
-    required this.success,
-  });
+class AttendanceLoaded extends AttendanceState {
+  final int classSessionId;
+  final List<StudentAttendance> students; // Lista mutable en memoria
 
-  factory AttendanceState.initial() => AttendanceState(
-        loading: false,
-        date: DateTime.now(),
-        selectedClassSessionId: null,
-        students: const [],
-        statuses: const [],
-        submitting: false,
-        error: null,
-        success: false,
-      );
-
-  AttendanceState copyWith({
-    bool? loading,
-    DateTime? date,
-    int? selectedClassSessionId,
-    List<StudentItem>? students,
-    List<String>? statuses,
-    bool? submitting,
-    String? error,
-    bool? success,
+  AttendanceLoaded({required this.classSessionId, required this.students});
+  
+  // Método copyWith para actualizar la lista inmutablemente
+  AttendanceLoaded copyWith({
+    int? classSessionId,
+    List<StudentAttendance>? students,
   }) {
-    return AttendanceState(
-      loading: loading ?? this.loading,
-      date: date ?? this.date,
-      selectedClassSessionId: selectedClassSessionId ?? this.selectedClassSessionId,
+    return AttendanceLoaded(
+      classSessionId: classSessionId ?? this.classSessionId,
       students: students ?? this.students,
-      statuses: statuses ?? this.statuses,
-      submitting: submitting ?? this.submitting,
-      error: error,
-      success: success ?? this.success,
     );
   }
+}
 
-  @override
-  List<Object?> get props =>
-      [loading, date, selectedClassSessionId, students, statuses, submitting, error, success];
+class AttendanceSuccess extends AttendanceState {} // Guardado exitoso
+class AttendanceFailure extends AttendanceState {
+  final String message;
+  AttendanceFailure(this.message);
 }

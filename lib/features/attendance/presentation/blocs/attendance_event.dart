@@ -1,42 +1,19 @@
-// ...existing code...
-import 'package:equatable/equatable.dart';
+import 'package:demy_teachers/features/attendance/domain/entities/student.dart';
 
-abstract class AttendanceEvent extends Equatable {
-  const AttendanceEvent();
+abstract class AttendanceEvent {}
 
-  @override
-  List<Object?> get props => [];
+class LoadStudentsEvent extends AttendanceEvent {
+  final int classSessionId; // Lo necesitarás para guardar
+  LoadStudentsEvent(this.classSessionId);
 }
 
-class AttendanceInitRequested extends AttendanceEvent {
-  const AttendanceInitRequested();
+class ToggleStudentStatusEvent extends AttendanceEvent {
+  final String studentDni;
+  final AttendanceStatus newStatus;
+  ToggleStudentStatusEvent(this.studentDni, this.newStatus);
 }
 
-class AttendanceDateChanged extends AttendanceEvent {
+class SubmitAttendanceEvent extends AttendanceEvent {
   final DateTime date;
-  const AttendanceDateChanged(this.date);
-
-  @override
-  List<Object?> get props => [date];
-}
-
-class AttendanceCourseChanged extends AttendanceEvent {
-  final int classSessionId;
-  const AttendanceCourseChanged(this.classSessionId);
-
-  @override
-  List<Object?> get props => [classSessionId];
-}
-
-class AttendanceRecordStatusChanged extends AttendanceEvent {
-  final int studentIndex;
-  final String status; // 'PRESENT','ABSENT','AUSENT'
-  const AttendanceRecordStatusChanged(this.studentIndex, this.status);
-
-  @override
-  List<Object?> get props => [studentIndex, status];
-}
-
-class AttendanceSubmitRequested extends AttendanceEvent {
-  const AttendanceSubmitRequested();
+  SubmitAttendanceEvent(this.date);
 }
