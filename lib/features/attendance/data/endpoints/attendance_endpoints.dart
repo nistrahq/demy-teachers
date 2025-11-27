@@ -1,9 +1,5 @@
-
-import 'package:demy_teachers/core/constants/api_constants.dart';
-
 class AttendanceEndpoints {
-  static const String _authBase =  ApiConstants.attendanceEndpointPath;
-
-  static const  String create = _authBase;
-  static const  String getAll = '$_authBase/all';
+  static const String base = '/class-attendances'; // O la base que uses
+  static const String createAttendance = '$base'; // Ajusta según tu API real
+  static const String getStudents = '/students'; // Ajusta según tu API real
 }
