@@ -1,10 +1,36 @@
-import 'package:demy_teachers/features/attendance/domain/entities/attendance_record.dart';
-import 'package:demy_teachers/features/attendance/domain/entities/class_attendance.dart';
+import 'package:demy_teachers/core/network/api_client.dart';
+import 'package:demy_teachers/features/attendance/data/dtos/create_attendance_request_dto.dart';
+import 'package:demy_teachers/features/attendance/data/dtos/student_response_dto.dart';
+import 'package:demy_teachers/features/attendance/data/endpoints/attendance_endpoints.dart';
 
 abstract class AttendanceRemoteDataSource {
-  /// Envía asistencia y devuelve la asistencia creada (dominio).
-  Future<ClassAttendance> submitClassAttendance(int classSessionId, DateTime date, List<AttendanceRecord> records);
+  Future<List<StudentResponseDto>> getStudents(); // Quizás necesites filtrar por cursoId aquí en el futuro
+  Future<void> registerAttendance(CreateAttendanceRequestDto request);
+  
+}
 
-  /// Obtiene todas las asistencias desde el backend (dominio).
-  Future<List<ClassAttendance>> getAllClassAttendances();
+class AttendanceRemoteDataSourceImpl implements AttendanceRemoteDataSource {
+  final ApiClient apiClient;
+
+  AttendanceRemoteDataSourceImpl(this.apiClient);
+
+  @override
+  Future<List<StudentResponseDto>> getStudents() async {
+    final response = await apiClient.get<List<dynamic>>(AttendanceEndpoints.getStudents);
+    
+    if (response.data is List) {
+       return response.data!
+          .map((json) => StudentResponseDto.fromJson(json))
+          .toList();
+    }
+    throw Exception('Invalid format');
+  }
+
+  @override
+  Future<void> registerAttendance(CreateAttendanceRequestDto request) async {
+    await apiClient.post(
+      AttendanceEndpoints.createAttendance,
+      data: request.toJson(),
+    );
+  }
 }
