@@ -81,7 +81,15 @@ class HomePage extends StatelessWidget {
                       child: QuickAccessCard(
                         icon: Icons.calendar_today,
                         title: 'Attendance Report', 
-                        onTap: () {},
+                        onTap: () {
+                          context.pushNamed(
+                            'take_attendance',
+                            extra: {
+                              'sessionId': 4, // ID de prueba (debe existir en tu BD)
+                              'courseName': 'Chemistry - I239',
+                            },
+                          );
+                        },
                       ),
                     ),
                     
