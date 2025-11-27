@@ -1,37 +1,33 @@
-import 'package:injectable/injectable.dart';
 import 'package:demy_teachers/core/network/api_client.dart';
-import 'package:demy_teachers/features/attendance/data/datasources/attendance_local_data_source_impl.dart';
-import 'package:demy_teachers/features/attendance/data/datasources/attendance_local_data_source.dart';
-import 'package:demy_teachers/features/attendance/data/datasources/attendance_remote_data_source_impl.dart';
 import 'package:demy_teachers/features/attendance/data/datasources/attendance_remote_data_source.dart';
-import 'package:demy_teachers/features/attendance/data/repositories/attendance_repository_impl.dart';
 import 'package:demy_teachers/features/attendance/domain/repositories/attendance_repository.dart';
-import 'package:demy_teachers/features/attendance/domain/usecases/submit_class_attendance_use_case.dart';
+import 'package:demy_teachers/features/attendance/domain/repositories/attendance_repository_impl.dart';
+import 'package:demy_teachers/features/attendance/domain/usecases/get_students_use_case.dart';
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_bloc.dart';
+import 'package:injectable/injectable.dart';
+
 @module
 abstract class AttendanceModule {
   @lazySingleton
-  AttendanceLocalDataSource attendanceLocalDataSource() =>
-      AttendanceLocalDataSourceImpl();
+  AttendanceRemoteDataSource attendanceRemoteDataSource(ApiClient client) => 
+      AttendanceRemoteDataSourceImpl(client);
 
   @lazySingleton
-  AttendanceRemoteDataSource attendanceRemoteDataSource(ApiClient apiClient) =>
-      AttendanceRemoteDataSourceImpl(apiClient: apiClient);
+  AttendanceRepository attendanceRepository(AttendanceRemoteDataSource remote) => 
+      AttendanceRepositoryImpl(remote);
 
   @lazySingleton
-  AttendanceRepository attendanceRepository(
-          AttendanceLocalDataSource local, AttendanceRemoteDataSource remote) =>
-      AttendanceRepositoryImpl(localDataSource: local, remoteDataSource: remote);
+  GetStudentsUseCase getStudentsUseCase(AttendanceRepository repo) => 
+      GetStudentsUseCase(repo);
 
-  
-    // UseCase provider
   @lazySingleton
-  
-SubmitClassAttendaceUseCase submitClassAttendanceUseCase(AttendanceRepository repo) =>
-    SubmitClassAttendaceUseCase(repo);  
+  RegisterAttendanceUseCase registerAttendanceUseCase(AttendanceRepository repo) => 
+      RegisterAttendanceUseCase(repo);
 
-  // Bloc provider (factory - nueva instancia cuando sea requerida)
-  @factoryMethod
-  AttendanceBloc attendanceBloc(SubmitClassAttendaceUseCase useCase, AttendanceRepository repo) =>
-      AttendanceBloc(submitUseCase: useCase, repository: repo);
+  // Bloc injection
+  @injectable
+  AttendanceBloc attendanceBloc(
+      GetStudentsUseCase getStudents, 
+      RegisterAttendanceUseCase register
+  ) => AttendanceBloc(getStudents, register);
 }
