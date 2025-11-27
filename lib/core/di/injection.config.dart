@@ -40,12 +40,34 @@ import 'package:demy_teachers/features/auth/data/datasources/auth_local_data_sou
 import 'package:demy_teachers/features/auth/data/datasources/auth_remote_data_source.dart'
     as _i85;
 import 'package:demy_teachers/features/auth/data/di/auth_module.dart' as _i75;
+import 'package:demy_teachers/features/auth/data/services/active_user_provider.dart'
+    as _i4;
 import 'package:demy_teachers/features/auth/domain/repositories/auth_repository.dart'
     as _i604;
 import 'package:demy_teachers/features/auth/domain/usecases/sign_in_use_case.dart'
     as _i87;
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_bloc.dart'
     as _i536;
+import 'package:demy_teachers/features/profile/data/datasources/profile_remote_data_source.dart'
+    as _i498;
+import 'package:demy_teachers/features/profile/data/di/profile_module.dart'
+    as _i281;
+import 'package:demy_teachers/features/profile/domain/repositories/profile_repository.dart'
+    as _i43;
+import 'package:demy_teachers/features/profile/domain/usecases/get_current_teacher.dart'
+    as _i999;
+import 'package:demy_teachers/features/profile/presentation/blocs/profile_bloc.dart'
+    as _i725;
+import 'package:demy_teachers/features/schedule/data/datasources/schedule_remote_data_source.dart'
+    as _i353;
+import 'package:demy_teachers/features/schedule/data/di/schedule_module.dart'
+    as _i405;
+import 'package:demy_teachers/features/schedule/domain/repositories/schedule_repository.dart'
+    as _i952;
+import 'package:demy_teachers/features/schedule/domain/usecases/get_schedule_for_teacher_use_case.dart'
+    as _i57;
+import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_bloc.dart'
+    as _i460;
 import 'package:demy_teachers/features/splash/presentation/blocs/splash_bloc.dart'
     as _i871;
 import 'package:dio/dio.dart' as _i361;
@@ -62,6 +84,8 @@ extension GetItInjectableX on _i174.GetIt {
     final networkModule = _$NetworkModule();
     final attendanceModule = _$AttendanceModule();
     final authModule = _$AuthModule();
+    final profileModule = _$ProfileModule();
+    final scheduleModule = _$ScheduleModule();
     gh.factory<_i338.LanguageInterceptor>(() => _i338.LanguageInterceptor());
     gh.lazySingleton<_i0.AppConfig>(() => networkModule.appConfig());
     gh.lazySingleton<_i895.Connectivity>(() => networkModule.connectivity());
@@ -84,6 +108,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i85.AuthRemoteDataSource>(
       () => authModule.authRemoteDataSource(gh<_i552.ApiClient>()),
+    );
+    gh.lazySingleton<_i498.ProfileRemoteDataSource>(
+      () => profileModule.profileRemoteDataSource(gh<_i552.ApiClient>()),
+    );
+    gh.lazySingleton<_i353.ScheduleRemoteDataSource>(
+      () => scheduleModule.scheduleRemoteDataSource(gh<_i552.ApiClient>()),
     );
     gh.lazySingleton<_i883.AuthLocalDataSource>(
       () => authModule.authLocalDataSource(gh<_i586.SessionStorage>()),
@@ -126,8 +156,36 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i604.AuthRepository>(),
       ),
     );
+    gh.lazySingleton<_i4.ActiveUserProvider>(
+      () => _i4.ActiveUserProvider(gh<_i604.AuthRepository>()),
+    );
     gh.factory<_i811.AuthInterceptor>(
       () => _i811.AuthInterceptor(gh<_i963.TokenProvider>()),
+    );
+    gh.lazySingleton<_i952.ScheduleRepository>(
+      () => scheduleModule.scheduleRepository(
+        gh<_i353.ScheduleRemoteDataSource>(),
+        gh<_i4.ActiveUserProvider>(),
+      ),
+    );
+    gh.lazySingleton<_i43.ProfileRepository>(
+      () => profileModule.profileRepository(
+        gh<_i498.ProfileRemoteDataSource>(),
+        gh<_i4.ActiveUserProvider>(),
+      ),
+    );
+    gh.lazySingleton<_i999.GetCurrentTeacherUseCase>(
+      () =>
+          profileModule.getCurrentTeacherUseCase(gh<_i43.ProfileRepository>()),
+    );
+    gh.lazySingleton<_i57.GetScheduleForTeacher>(
+      () => scheduleModule.getSchedules(gh<_i952.ScheduleRepository>()),
+    );
+    gh.factory<_i460.ScheduleBloc>(
+      () => scheduleModule.scheduleBloc(gh<_i57.GetScheduleForTeacher>()),
+    );
+    gh.factory<_i725.ProfileBloc>(
+      () => profileModule.profileBloc(gh<_i999.GetCurrentTeacherUseCase>()),
     );
     return this;
   }
@@ -138,3 +196,7 @@ class _$NetworkModule extends _i0.NetworkModule {}
 class _$AttendanceModule extends _i642.AttendanceModule {}
 
 class _$AuthModule extends _i75.AuthModule {}
+
+class _$ProfileModule extends _i281.ProfileModule {}
+
+class _$ScheduleModule extends _i405.ScheduleModule {}
