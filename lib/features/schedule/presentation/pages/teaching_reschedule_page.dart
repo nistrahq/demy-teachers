@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class TeachingReschedulePage extends StatefulWidget {
-  final ClassSession session; // Recibimos el objeto completo
+  final ClassSession session;
 
   const TeachingReschedulePage({super.key, required this.session});
   
@@ -21,6 +21,10 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
   late TimeOfDay startTime;
   late TimeOfDay endTime;
   late String selectedDay;
+  
+  // NUEVOS: Almacenar los valores originales de TimeOfDay (calculados una sola vez)
+  late final TimeOfDay originalStartTime;
+  late final TimeOfDay originalEndTime;
   
   final List<String> daysOfWeek = [
     'Monday',
@@ -35,12 +39,15 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
   @override
   void initState() {
     super.initState();
-    // 1. Inicializamos los valores con los datos que vienen del item (ClassSession)
-    startTime = _parseTimeString(widget.session.startTime);
-    endTime = _parseTimeString(widget.session.endTime);
+    
+    // 1. Calcular y almacenar los objetos TimeOfDay originales
+    originalStartTime = _parseTimeString(widget.session.startTime);
+    startTime = originalStartTime;
+
+    originalEndTime = _parseTimeString(widget.session.endTime);
+    endTime = originalEndTime;
+    
     selectedDay = widget.session.dayOfWeek;
-    // Nota: Asegúrate que dayOfWeek venga en formato "Monday", "Tuesday", etc.
-    // O ten una función que lo capitalice correctamente.
   }
 
   // Helper para convertir "18:00:00" -> TimeOfDay(18, 0)
@@ -55,11 +62,9 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
 
   // Lógica para saber si el usuario modificó algo
   bool get _hasChanges {
-    final originalStart = _parseTimeString(widget.session.startTime);
-    final originalEnd = _parseTimeString(widget.session.endTime);
-    
-    return startTime != originalStart ||
-           endTime != originalEnd ||
+    // CORRECCIÓN: Compara el estado actual con las instancias originales almacenadas.
+    return startTime != originalStartTime ||
+           endTime != originalEndTime ||
            selectedDay != widget.session.dayOfWeek;
   }
 
@@ -69,7 +74,7 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
       context: context,
       initialTime: isStartTime ? startTime : endTime,
       builder: (context, child) {
-        // Opcional: Esto fuerza el tema claro si tu app es oscura, o viceversa
+        // Utilizamos el tema por defecto del TimePicker (flotante)
         return Theme(
           data: Theme.of(context).copyWith(
             timePickerTheme: TimePickerThemeData(
@@ -122,6 +127,29 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
       },
     );
   }
+  
+  // --- LÓGICA: Diálogo de Confirmación ---
+  Future<bool> _showConfirmationDialog() async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Reschedule'),
+          content: const Text('Are you sure you want to reschedule this class with the selected changes?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Yes, Save Changes'),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
+  }
 
   // Helper para formatear TimeOfDay a String 24h para la API (ej: "18:30:00")
   String _formatTimeForApi(TimeOfDay time) {
@@ -132,23 +160,29 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
 
   @override
   Widget build(BuildContext context) {
+    final bool canSave = _hasChanges;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return BlocProvider(
       create: (_) => GetIt.I<RescheduleBloc>(),
       child: BlocConsumer<RescheduleBloc, RescheduleState>(
         listener: (context, state) {
           if (state is RescheduleSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Rescheduled successfully!')));
-            context.pop(); // Volver atrás
+            // 🎯 CAMBIO CLAVE 1: CERRAR LA PÁGINA DEVOLVIENDO 'true'
+            context.pop(true); // Indica que la operación fue exitosa
           }
           if (state is RescheduleFailure) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), backgroundColor: Colors.red));
           }
         },
         builder: (context, state) {
+          final bool isSaving = state is RescheduleLoading;
+
           return Scaffold(
             appBar: AppBar(
               title: const Text('Teaching Reschedule', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-              backgroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: colorScheme.primary,
               iconTheme: const IconThemeData(color: Colors.white),
             ),
             body: Column(
@@ -216,25 +250,39 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
                       const SizedBox(width: 16),
                       Expanded(
                         child: FilledButton(
-                          onPressed: (_hasChanges && state is! RescheduleLoading)
-                            ? () {
-                                context.read<RescheduleBloc>().add(SubmitReschedule(
-                                  sessionId: widget.session.id,
-                                  classroomId: widget.session.classroom.id,
-                                  startTime: _formatTimeForApi(startTime), 
-                                  endTime: _formatTimeForApi(endTime),
-                                  dayOfWeek: selectedDay.toUpperCase(),
-                                ));
+                          // Habilitado solo si hay cambios Y no está cargando
+                          onPressed: (canSave && !isSaving)
+                            ? () async {
+                                // 1. Mostrar diálogo de confirmación
+                                final confirmed = await _showConfirmationDialog();
+
+                                // 2. Si se confirma, enviar el evento BLoC
+                                if (confirmed) {
+                                  context.read<RescheduleBloc>().add(SubmitReschedule(
+                                    sessionId: widget.session.id,
+                                    classroomId: widget.session.classroom.id,
+                                    startTime: _formatTimeForApi(startTime), 
+                                    endTime: _formatTimeForApi(endTime),
+                                    dayOfWeek: selectedDay.toUpperCase(),
+                                  ));
+                                }
                               }
-                              : null,
+                              : null, // Deshabilita el botón si no se puede guardar
+                          // 🎯 CAMBIO CLAVE 2: Estilo dinámico del botón
                           style: FilledButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: Colors.grey[300], // Color desactivado visualmente en la imagen, ajusta según tema
-                            foregroundColor: Colors.black54,
+                            backgroundColor: canSave 
+                                ? colorScheme.primaryContainer // Color primario si hay cambios
+                                : Colors.grey[300], // Gris si no hay cambios
+                            foregroundColor: canSave
+                                ? colorScheme.onPrimaryContainer
+                                : Colors.black54,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
-                          child: state is RescheduleLoading 
-                            ? const CircularProgressIndicator.adaptive() 
+                          child: isSaving
+                            ? const CircularProgressIndicator.adaptive(
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              ) 
                             : const Text("Save"),
                         ),
                       ),
@@ -250,12 +298,12 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
   }
 
 Widget _buildSelectionTile({required IconData icon, required String title, required String value, required VoidCallback onTap}) {
-    return Material( // Añadido Material para el efecto Ripple al tocar
+    return Material( 
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12), // Para que el ripple respete bordes si es el primero/último
-        child: Padding( // Moví el padding dentro del InkWell para mejor área de toque
+        borderRadius: BorderRadius.circular(12), 
+        child: Padding( 
           padding: const EdgeInsets.symmetric(vertical: 4.0), 
           child: ListTile(
             leading: Icon(icon, color: Colors.grey[700]),
@@ -279,7 +327,7 @@ Widget _buildSelectionTile({required IconData icon, required String title, requi
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFE8E9F0), // Gris claro estilo input disabled
+        color: const Color(0xFFE8E9F0), 
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
