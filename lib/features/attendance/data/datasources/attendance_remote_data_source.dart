@@ -30,7 +30,7 @@ class AttendanceRemoteDataSourceImpl implements AttendanceRemoteDataSource {
   Future<void> registerAttendance(CreateAttendanceRequestDto request) async {
     await apiClient.post(
       AttendanceEndpoints.createAttendance,
-      data: request.toJson(),
+      body: request.toJson(),
     );
   }
 }
