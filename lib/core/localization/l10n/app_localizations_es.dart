@@ -71,4 +71,7 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get settingsPagePlaceholder =>
       'Las opciones de configuración estarán disponibles pronto...';
+
+  @override
+  String get registerAttendanceButtonLabel => 'Registrar Asistencia';
 }

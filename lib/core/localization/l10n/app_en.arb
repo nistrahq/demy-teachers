@@ -19,5 +19,9 @@
   "profilePageTitle": "My Profile",
   "profilePagePlaceholder": "Profile information coming soon...",
   "settingsPageTitle": "Settings",
-  "settingsPagePlaceholder": "Settings options coming soon..."
+  "settingsPagePlaceholder": "Settings options coming soon...",
+   "registerAttendanceButtonLabel": "Take Attendance",
+    "@registerAttendanceButtonLabel": {
+        "description": "Label for attendance registration button"
+    }
 }

@@ -1,3 +1,7 @@
+import 'package:demy_teachers/core/di/injection.dart';
+import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_bloc.dart';
+import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_event.dart';
+import 'package:demy_teachers/features/attendance/presentation/pages/take_attendance_page.dart'; // Asegúrate de importar esto
 import 'package:demy_teachers/features/auth/presentation/navigation/auth_routes.dart';
 import 'package:demy_teachers/features/home/presentation/pages/home_page.dart';
 import 'package:demy_teachers/features/profile/presentation/pages/profile_page.dart';
@@ -14,6 +18,21 @@ final GoRouter appRouter = GoRouter(
     ...splashRoutes,
     ...authRoutes,
     ...scheduleRoutes,
+
+    GoRoute(
+      path: '/take-attendance',
+      name: 'take_attendance',
+      builder: (context, state) {
+        // Recibimos los argumentos enviados desde el botón
+        final Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+        return TakeAttendancePage(
+          classSessionId: args['sessionId'] as int,
+          courseName: args['courseName'] as String,
+        );
+      },
+    ),
+
+    // --- Aquí empieza el Menú con BottomNavigationBar ---
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
           return Scaffold(
@@ -29,6 +48,7 @@ final GoRouter appRouter = GoRouter(
       },
 
       branches: [
+        // Rama Perfil
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -38,6 +58,7 @@ final GoRouter appRouter = GoRouter(
             ),
           ],
         ),
+        // Rama Home
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -47,12 +68,15 @@ final GoRouter appRouter = GoRouter(
             ),
           ],
         ),
+        // Rama Settings
         StatefulShellBranch(
           routes: [
             GoRoute(
               path: '/settings',
               name: 'settings',
               builder: (context, state) => const SettingsPage(),
+
+              routes: [], 
             ),
           ],
         ),

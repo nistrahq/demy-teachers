@@ -68,4 +68,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsPagePlaceholder => 'Settings options coming soon...';
+
+  @override
+  String get registerAttendanceButtonLabel => 'Take Attendance';
 }
