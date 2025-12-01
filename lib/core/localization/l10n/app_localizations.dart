@@ -373,6 +373,516 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go to Home'**
   String get goToHomeButton;
+
+  /// No description provided for @termsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get termsAndConditions;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @signOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get signOut;
+
+  /// No description provided for @termsSection1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Acceptance of Terms'**
+  String get termsSection1Title;
+
+  /// No description provided for @termsSection1Content.
+  ///
+  /// In en, this message translates to:
+  /// **'By using the Demy platform, you accept these terms. Demy is an academic management system for academies and educational centers.'**
+  String get termsSection1Content;
+
+  /// No description provided for @termsSection2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'2. Service Description'**
+  String get termsSection2Title;
+
+  /// No description provided for @termsSection2Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Demy offers tools for:'**
+  String get termsSection2Content;
+
+  /// No description provided for @termsSection2Item1.
+  ///
+  /// In en, this message translates to:
+  /// **'Enrollment and student management'**
+  String get termsSection2Item1;
+
+  /// No description provided for @termsSection2Item2.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule and class administration'**
+  String get termsSection2Item2;
+
+  /// No description provided for @termsSection2Item3.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments, billing and financial control'**
+  String get termsSection2Item3;
+
+  /// No description provided for @termsSection2Item4.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports and academic tracking'**
+  String get termsSection2Item4;
+
+  /// No description provided for @termsSection2Item5.
+  ///
+  /// In en, this message translates to:
+  /// **'Communication with students and parents'**
+  String get termsSection2Item5;
+
+  /// No description provided for @termsSection2Item6.
+  ///
+  /// In en, this message translates to:
+  /// **'Teacher and staff management'**
+  String get termsSection2Item6;
+
+  /// No description provided for @termsSection3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'3. User Accounts'**
+  String get termsSection3Title;
+
+  /// No description provided for @termsSection3Content.
+  ///
+  /// In en, this message translates to:
+  /// **'You must create an account with correct information. You are responsible for your password and activities within your account. If there is unauthorized use, you must report it.'**
+  String get termsSection3Content;
+
+  /// No description provided for @termsSection4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'4. Acceptable Use'**
+  String get termsSection4Title;
+
+  /// No description provided for @termsSection4Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Demy can only be used for academic purposes. The following is not permitted:'**
+  String get termsSection4Content;
+
+  /// No description provided for @termsSection4Item1.
+  ///
+  /// In en, this message translates to:
+  /// **'Illegal or unauthorized activities'**
+  String get termsSection4Item1;
+
+  /// No description provided for @termsSection4Item2.
+  ///
+  /// In en, this message translates to:
+  /// **'Interfering with the platform'**
+  String get termsSection4Item2;
+
+  /// No description provided for @termsSection4Item3.
+  ///
+  /// In en, this message translates to:
+  /// **'Attempting to access other accounts'**
+  String get termsSection4Item3;
+
+  /// No description provided for @termsSection4Item4.
+  ///
+  /// In en, this message translates to:
+  /// **'Providing false information'**
+  String get termsSection4Item4;
+
+  /// No description provided for @termsSection4Item5.
+  ///
+  /// In en, this message translates to:
+  /// **'Infringing intellectual property'**
+  String get termsSection4Item5;
+
+  /// No description provided for @termsSection5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'5. Data and Content'**
+  String get termsSection5Title;
+
+  /// No description provided for @termsSection5Content.
+  ///
+  /// In en, this message translates to:
+  /// **'The data you enter is yours. You give us permission to process and store it only to provide the service. We protect sensitive information and maintain its confidentiality.'**
+  String get termsSection5Content;
+
+  /// No description provided for @termsSection6Title.
+  ///
+  /// In en, this message translates to:
+  /// **'6. Billing and Payments'**
+  String get termsSection6Title;
+
+  /// No description provided for @termsSection6Content.
+  ///
+  /// In en, this message translates to:
+  /// **'The service works through monthly or annual subscription. Renewal is automatic. You can cancel at any time from your control panel.'**
+  String get termsSection6Content;
+
+  /// No description provided for @termsSection7Title.
+  ///
+  /// In en, this message translates to:
+  /// **'7. Limitation of Liability'**
+  String get termsSection7Title;
+
+  /// No description provided for @termsSection7Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Demy is offered \"as is\". We do not guarantee that it is free of errors or interruptions. Our liability is limited to the amount paid during the last 12 months.'**
+  String get termsSection7Content;
+
+  /// No description provided for @termsSection8Title.
+  ///
+  /// In en, this message translates to:
+  /// **'8. Termination'**
+  String get termsSection8Title;
+
+  /// No description provided for @termsSection8Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We may suspend your access if you violate the terms. If the service ends, your data can be downloaded for 30 days before being deleted.'**
+  String get termsSection8Content;
+
+  /// No description provided for @termsSection9Title.
+  ///
+  /// In en, this message translates to:
+  /// **'9. Modifications'**
+  String get termsSection9Title;
+
+  /// No description provided for @termsSection9Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We may update these terms. If there are important changes, we will notify you 30 days in advance. Continuing to use Demy implies accepting the new terms.'**
+  String get termsSection9Content;
+
+  /// No description provided for @termsSection10Title.
+  ///
+  /// In en, this message translates to:
+  /// **'10. Contact'**
+  String get termsSection10Title;
+
+  /// No description provided for @termsSection10Content.
+  ///
+  /// In en, this message translates to:
+  /// **'For inquiries:\ncontact.demyteam@gmail.com'**
+  String get termsSection10Content;
+
+  /// No description provided for @termsLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: December 2025'**
+  String get termsLastUpdated;
+
+  /// No description provided for @privacySection1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Information We Collect'**
+  String get privacySection1Title;
+
+  /// No description provided for @privacySection1Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We collect data necessary to operate the platform:'**
+  String get privacySection1Content;
+
+  /// No description provided for @privacySection1Item1.
+  ///
+  /// In en, this message translates to:
+  /// **'Institution data (name, address, contact, tax information)'**
+  String get privacySection1Item1;
+
+  /// No description provided for @privacySection1Item2.
+  ///
+  /// In en, this message translates to:
+  /// **'Administrators (name, email, roles)'**
+  String get privacySection1Item2;
+
+  /// No description provided for @privacySection1Item3.
+  ///
+  /// In en, this message translates to:
+  /// **'Students (academic data, contact, payment history with authorization)'**
+  String get privacySection1Item3;
+
+  /// No description provided for @privacySection1Item4.
+  ///
+  /// In en, this message translates to:
+  /// **'Teachers (professional information, schedules, courses)'**
+  String get privacySection1Item4;
+
+  /// No description provided for @privacySection1Item5.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform usage (activity, preferences, logs)'**
+  String get privacySection1Item5;
+
+  /// No description provided for @privacySection2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'2. Use of Information'**
+  String get privacySection2Title;
+
+  /// No description provided for @privacySection2Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We use the data to:'**
+  String get privacySection2Content;
+
+  /// No description provided for @privacySection2Item1.
+  ///
+  /// In en, this message translates to:
+  /// **'Provide and improve services'**
+  String get privacySection2Item1;
+
+  /// No description provided for @privacySection2Item2.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage enrollments, schedules and payments'**
+  String get privacySection2Item2;
+
+  /// No description provided for @privacySection2Item3.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate reports'**
+  String get privacySection2Item3;
+
+  /// No description provided for @privacySection2Item4.
+  ///
+  /// In en, this message translates to:
+  /// **'Facilitate communication'**
+  String get privacySection2Item4;
+
+  /// No description provided for @privacySection2Item5.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain system security'**
+  String get privacySection2Item5;
+
+  /// No description provided for @privacySection2Item6.
+  ///
+  /// In en, this message translates to:
+  /// **'Comply with legal obligations'**
+  String get privacySection2Item6;
+
+  /// No description provided for @privacySection3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'3. Academic Data Protection'**
+  String get privacySection3Title;
+
+  /// No description provided for @privacySection3Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We apply special measures such as:'**
+  String get privacySection3Content;
+
+  /// No description provided for @privacySection3Item1.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption of sensitive data'**
+  String get privacySection3Item1;
+
+  /// No description provided for @privacySection3Item2.
+  ///
+  /// In en, this message translates to:
+  /// **'Access by roles and permissions'**
+  String get privacySection3Item2;
+
+  /// No description provided for @privacySection3Item3.
+  ///
+  /// In en, this message translates to:
+  /// **'Periodic audits'**
+  String get privacySection3Item3;
+
+  /// No description provided for @privacySection3Item4.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure backups'**
+  String get privacySection3Item4;
+
+  /// No description provided for @privacySection3Item5.
+  ///
+  /// In en, this message translates to:
+  /// **'Compliance with educational standards'**
+  String get privacySection3Item5;
+
+  /// No description provided for @privacySection4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'4. Sharing Information'**
+  String get privacySection4Title;
+
+  /// No description provided for @privacySection4Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We do not sell data. We only share when:'**
+  String get privacySection4Content;
+
+  /// No description provided for @privacySection4Item1.
+  ///
+  /// In en, this message translates to:
+  /// **'Required by educational authorities'**
+  String get privacySection4Item1;
+
+  /// No description provided for @privacySection4Item2.
+  ///
+  /// In en, this message translates to:
+  /// **'Needed by technical providers under confidentiality'**
+  String get privacySection4Item2;
+
+  /// No description provided for @privacySection4Item3.
+  ///
+  /// In en, this message translates to:
+  /// **'The institution authorizes it'**
+  String get privacySection4Item3;
+
+  /// No description provided for @privacySection4Item4.
+  ///
+  /// In en, this message translates to:
+  /// **'There is a legal or judicial obligation'**
+  String get privacySection4Item4;
+
+  /// No description provided for @privacySection5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'5. Data Retention'**
+  String get privacySection5Title;
+
+  /// No description provided for @privacySection5Item1.
+  ///
+  /// In en, this message translates to:
+  /// **'Academic: minimum 5 years'**
+  String get privacySection5Item1;
+
+  /// No description provided for @privacySection5Item2.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing: 7 years'**
+  String get privacySection5Item2;
+
+  /// No description provided for @privacySection5Item3.
+  ///
+  /// In en, this message translates to:
+  /// **'Access logs: 2 years'**
+  String get privacySection5Item3;
+
+  /// No description provided for @privacySection5Item4.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact: until deletion is requested'**
+  String get privacySection5Item4;
+
+  /// No description provided for @privacySection6Title.
+  ///
+  /// In en, this message translates to:
+  /// **'6. Your Rights'**
+  String get privacySection6Title;
+
+  /// No description provided for @privacySection6Content.
+  ///
+  /// In en, this message translates to:
+  /// **'The institution can:'**
+  String get privacySection6Content;
+
+  /// No description provided for @privacySection6Item1.
+  ///
+  /// In en, this message translates to:
+  /// **'Access and export its data'**
+  String get privacySection6Item1;
+
+  /// No description provided for @privacySection6Item2.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct information'**
+  String get privacySection6Item2;
+
+  /// No description provided for @privacySection6Item3.
+  ///
+  /// In en, this message translates to:
+  /// **'Request portability'**
+  String get privacySection6Item3;
+
+  /// No description provided for @privacySection6Item4.
+  ///
+  /// In en, this message translates to:
+  /// **'Restrict processing'**
+  String get privacySection6Item4;
+
+  /// No description provided for @privacySection6Item5.
+  ///
+  /// In en, this message translates to:
+  /// **'Request deletion (according to law)'**
+  String get privacySection6Item5;
+
+  /// No description provided for @privacySection6Item6.
+  ///
+  /// In en, this message translates to:
+  /// **'Be notified of security breaches'**
+  String get privacySection6Item6;
+
+  /// No description provided for @privacySection7Title.
+  ///
+  /// In en, this message translates to:
+  /// **'7. International Transfers'**
+  String get privacySection7Title;
+
+  /// No description provided for @privacySection7Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Data may be processed outside the country under international standards and approved protection clauses.'**
+  String get privacySection7Content;
+
+  /// No description provided for @privacySection8Title.
+  ///
+  /// In en, this message translates to:
+  /// **'8. Minors'**
+  String get privacySection8Title;
+
+  /// No description provided for @privacySection8Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We require consent from parents or guardians. Minor data is handled with additional protection and only for educational purposes.'**
+  String get privacySection8Content;
+
+  /// No description provided for @privacySection9Title.
+  ///
+  /// In en, this message translates to:
+  /// **'9. Policy Changes'**
+  String get privacySection9Title;
+
+  /// No description provided for @privacySection9Content.
+  ///
+  /// In en, this message translates to:
+  /// **'We will notify important changes 30 days in advance. Minor changes will be published directly.'**
+  String get privacySection9Content;
+
+  /// No description provided for @privacySection10Title.
+  ///
+  /// In en, this message translates to:
+  /// **'10. Contact and DPO'**
+  String get privacySection10Title;
+
+  /// No description provided for @privacySection10Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy inquiries: contact.demyteam@gmail.com\n\nData Protection Officer (DPO): dpo@demy.com'**
+  String get privacySection10Content;
+
+  /// No description provided for @privacyLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: December 2025'**
+  String get privacyLastUpdated;
 }
 
 class _AppLocalizationsDelegate
