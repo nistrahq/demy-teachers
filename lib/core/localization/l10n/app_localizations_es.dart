@@ -446,4 +446,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get privacyLastUpdated => 'Última actualización: Diciembre 2025';
+
+  @override
+  String get byUsingDemyYouAccept => 'Al usar Demy for Teachers, aceptas los';
+
+  @override
+  String get and => 'y la';
 }

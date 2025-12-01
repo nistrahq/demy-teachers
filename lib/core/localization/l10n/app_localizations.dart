@@ -913,6 +913,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last updated: December 2025'**
   String get privacyLastUpdated;
+
+  /// No description provided for @byUsingDemyYouAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'By using Demy for Teachers, you accept the'**
+  String get byUsingDemyYouAccept;
+
+  /// No description provided for @and.
+  ///
+  /// In en, this message translates to:
+  /// **'and the'**
+  String get and;
 }
 
 class _AppLocalizationsDelegate

@@ -138,5 +138,7 @@
   "privacySection9Content": "We will notify important changes 30 days in advance. Minor changes will be published directly.",
   "privacySection10Title": "10. Contact and DPO",
   "privacySection10Content": "Privacy inquiries: contact.demyteam@gmail.com\n\nData Protection Officer (DPO): dpo@demy.com",
-  "privacyLastUpdated": "Last updated: December 2025"
+  "privacyLastUpdated": "Last updated: December 2025",
+  "byUsingDemyYouAccept": "By using Demy for Teachers, you accept the",
+  "and": "and the"
 }
