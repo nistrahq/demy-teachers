@@ -23,5 +23,30 @@
    "registerAttendanceButtonLabel": "Take Attendance",
     "@registerAttendanceButtonLabel": {
         "description": "Label for attendance registration button"
-    }
+    },
+  "phoneNumberLabel": "Phone Number",
+  "resetPasswordButton": "Reset Password",
+  "verifyResetCodeTitle": "Enter Verification Code",
+  "verifyResetCodeDescription": "We sent a code to your email address, enter it to reset your password",
+  "verificationCodeLabel": "Verification Code",
+  "verificationCodeHint": "Enter code",
+  "verificationCodeRequired": "Verification code is required",
+  "verifyCodeButton": "Verify Code",
+  "resetPasswordTitle": "Reset Password",
+  "resetPasswordDescription": "Enter your new password and confirm it",
+  "oldPasswordLabel": "Current Password",
+  "oldPasswordHint": "Enter your current password",
+  "oldPasswordRequired": "Current password is required",
+  "newPasswordLabel": "New Password",
+  "newPasswordHint": "Enter your new password",
+  "newPasswordRequired": "New password is required",
+  "newPasswordTooShort": "Password must be at least 6 characters",
+  "confirmPasswordLabel": "Confirm Password",
+  "confirmPasswordHint": "Confirm your new password",
+  "confirmPasswordRequired": "Please confirm your password",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "submitButton": "Submit",
+  "resetPasswordSuccessTitle": "Password Reset Successful!",
+  "resetPasswordSuccessMessage": "Your password has been reset successfully. You can now sign in with your new password.",
+  "goToHomeButton": "Go to Home"
 }
