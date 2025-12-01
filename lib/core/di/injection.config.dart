@@ -42,10 +42,18 @@ import 'package:demy_teachers/features/auth/data/services/active_user_provider.d
     as _i4;
 import 'package:demy_teachers/features/auth/domain/repositories/auth_repository.dart'
     as _i604;
+import 'package:demy_teachers/features/auth/domain/usecases/request_reset_password_use_case.dart'
+    as _i1013;
+import 'package:demy_teachers/features/auth/domain/usecases/reset_password_use_case.dart'
+    as _i579;
 import 'package:demy_teachers/features/auth/domain/usecases/sign_in_use_case.dart'
     as _i87;
+import 'package:demy_teachers/features/auth/domain/usecases/verify_reset_code_use_case.dart'
+    as _i998;
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_bloc.dart'
     as _i536;
+import 'package:demy_teachers/features/auth/presentation/blocs/reset_password_bloc.dart'
+    as _i406;
 import 'package:demy_teachers/features/profile/data/datasources/profile_remote_data_source.dart'
     as _i498;
 import 'package:demy_teachers/features/profile/data/di/profile_module.dart'
@@ -143,6 +151,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i87.SignInUser>(
       () => authModule.signInUser(gh<_i604.AuthRepository>()),
     );
+    gh.lazySingleton<_i1013.RequestResetPasswordUseCase>(
+      () => authModule.requestResetPasswordUseCase(gh<_i604.AuthRepository>()),
+    );
+    gh.lazySingleton<_i998.VerifyResetCodeUseCase>(
+      () => authModule.verifyResetCodeUseCase(gh<_i604.AuthRepository>()),
+    );
+    gh.lazySingleton<_i579.ResetPasswordUseCase>(
+      () => authModule.resetPasswordUseCase(gh<_i604.AuthRepository>()),
+    );
     gh.factory<_i703.AttendanceBloc>(
       () => attendanceModule.attendanceBloc(
         gh<_i422.GetStudentsUseCase>(),
@@ -151,6 +168,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i871.SplashBloc>(
       () => _i871.SplashBloc(gh<_i604.AuthRepository>()),
+    );
+    gh.factory<_i406.ResetPasswordBloc>(
+      () => authModule.resetPasswordBloc(
+        gh<_i1013.RequestResetPasswordUseCase>(),
+        gh<_i998.VerifyResetCodeUseCase>(),
+        gh<_i579.ResetPasswordUseCase>(),
+      ),
     );
     gh.factory<_i536.AuthBloc>(
       () => authModule.authBloc(

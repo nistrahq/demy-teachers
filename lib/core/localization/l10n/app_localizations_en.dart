@@ -71,4 +71,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registerAttendanceButtonLabel => 'Take Attendance';
+
+  @override
+  String get phoneNumberLabel => 'Phone Number';
+
+  @override
+  String get resetPasswordButton => 'Reset Password';
+
+  @override
+  String get verifyResetCodeTitle => 'Enter Verification Code';
+
+  @override
+  String get verifyResetCodeDescription =>
+      'We sent a code to your email address, enter it to reset your password';
+
+  @override
+  String get verificationCodeLabel => 'Verification Code';
+
+  @override
+  String get verificationCodeHint => 'Enter code';
+
+  @override
+  String get verificationCodeRequired => 'Verification code is required';
+
+  @override
+  String get verifyCodeButton => 'Verify Code';
+
+  @override
+  String get resetPasswordTitle => 'Reset Password';
+
+  @override
+  String get resetPasswordDescription =>
+      'Enter your new password and confirm it';
+
+  @override
+  String get oldPasswordLabel => 'Current Password';
+
+  @override
+  String get oldPasswordHint => 'Enter your current password';
+
+  @override
+  String get oldPasswordRequired => 'Current password is required';
+
+  @override
+  String get newPasswordLabel => 'New Password';
+
+  @override
+  String get newPasswordHint => 'Enter your new password';
+
+  @override
+  String get newPasswordRequired => 'New password is required';
+
+  @override
+  String get newPasswordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get confirmPasswordHint => 'Confirm your new password';
+
+  @override
+  String get confirmPasswordRequired => 'Please confirm your password';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get submitButton => 'Submit';
+
+  @override
+  String get resetPasswordSuccessTitle => 'Password Reset Successful!';
+
+  @override
+  String get resetPasswordSuccessMessage =>
+      'Your password has been reset successfully. You can now sign in with your new password.';
+
+  @override
+  String get goToHomeButton => 'Go to Home';
 }
