@@ -35,12 +35,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
   }
 
   @override
-  Future<void> resetPassword(String emailAddress, String password, String confirmPassword) async {
+  Future<User> resetPassword(String emailAddress, String password, String confirmPassword) async {
     final request = ResetPasswordDto(
       emailAddress: emailAddress,
       password: password,
       confirmPassword: confirmPassword,
     );
-    await apiClient.post(AuthEndpoints.resetPassword, body: request.toJson());
+    final response = await apiClient.post(AuthEndpoints.resetPassword, body: request.toJson());
+    
+    if (response.data is Map<String, dynamic>) {
+      final dto = ResetPasswordResponseDto.fromJson(response.data!);
+      return User(
+        id: dto.id,
+        email: dto.emailAddress,
+        token: dto.token,
+      );
+    }
+
+    throw Exception('Invalid response format from API.');
   }
 }

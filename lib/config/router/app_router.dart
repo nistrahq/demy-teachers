@@ -1,5 +1,6 @@
 import 'package:demy_teachers/features/attendance/presentation/pages/take_attendance_page.dart'; // Asegúrate de importar esto
 import 'package:demy_teachers/features/auth/presentation/navigation/auth_routes.dart';
+import 'package:demy_teachers/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:demy_teachers/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:demy_teachers/features/auth/presentation/pages/reset_password_success_page.dart';
 import 'package:demy_teachers/features/auth/presentation/pages/verify_reset_code_page.dart';
@@ -30,6 +31,12 @@ final GoRouter appRouter = GoRouter(
           courseName: args['courseName'] as String,
         );
       },
+    ),
+
+    GoRoute(
+      path: '/forgot-password',
+      name: 'forgot-password',
+      builder: (context, state) => const ForgotPasswordPage(),
     ),
 
     GoRoute(

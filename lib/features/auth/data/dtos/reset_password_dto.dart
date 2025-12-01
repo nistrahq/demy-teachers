@@ -19,15 +19,21 @@ class ResetPasswordDto {
 }
 
 class ResetPasswordResponseDto {
-  final String message;
+  final int id;
+  final String emailAddress;
+  final String token;
 
   const ResetPasswordResponseDto({
-    required this.message,
+    required this.id,
+    required this.emailAddress,
+    required this.token,
   });
 
   factory ResetPasswordResponseDto.fromJson(Map<String, dynamic> json) {
     return ResetPasswordResponseDto(
-      message: json['message'] as String,
+      id: json['id'] as int,
+      emailAddress: json['emailAddress'] as String,
+      token: json['token'] as String,
     );
   }
 }

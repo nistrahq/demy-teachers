@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:demy_teachers/core/errors/failure.dart';
 import 'package:demy_teachers/core/usecases/usecase.dart';
+import 'package:demy_teachers/features/auth/domain/entities/user.dart';
 import 'package:demy_teachers/features/auth/domain/repositories/auth_repository.dart';
 
 class ResetPasswordParams {
@@ -15,13 +16,13 @@ class ResetPasswordParams {
   });
 }
 
-class ResetPasswordUseCase implements UseCase<void, ResetPasswordParams> {
+class ResetPasswordUseCase implements UseCase<Either<Failure, User>, ResetPasswordParams> {
   final AuthRepository repository;
 
   ResetPasswordUseCase(this.repository);
 
   @override
-  Future<Either<Failure, void>> call(ResetPasswordParams params) async {
+  Future<Either<Failure, User>> call(ResetPasswordParams params) async {
     return await repository.resetPassword(
       params.emailAddress,
       params.password,

@@ -37,13 +37,16 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> resetPassword(
+  Future<Either<Failure, User>> resetPassword(
     String emailAddress,
     String password,
     String confirmPassword,
   ) async {
     return safeCall(() async {
-      await remoteDataSource.resetPassword(emailAddress, password, confirmPassword);
+      final user = await remoteDataSource.resetPassword(emailAddress, password, confirmPassword);
+      await localDataSource.saveToken(user.token);
+      await localDataSource.saveUser(id: user.id, email: user.email);
+      return user;
     });
   }
 

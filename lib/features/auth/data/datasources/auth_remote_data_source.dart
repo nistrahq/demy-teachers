@@ -4,5 +4,5 @@ abstract class AuthRemoteDataSource {
   Future<User> signIn(String email, String password);
   Future<void> requestResetPassword(String emailAddress);
   Future<void> verifyResetCode(String emailAddress, String code);
-  Future<void> resetPassword(String emailAddress, String password, String confirmPassword);
+  Future<User> resetPassword(String emailAddress, String password, String confirmPassword);
 }
