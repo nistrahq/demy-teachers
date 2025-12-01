@@ -9,7 +9,7 @@ abstract class AuthRepository {
 
   Future<Either<Failure, void>> verifyResetCode(String emailAddress, String code);
 
-  Future<Either<Failure, void>> resetPassword(
+  Future<Either<Failure, User>> resetPassword(
     String emailAddress,
     String password,
     String confirmPassword,

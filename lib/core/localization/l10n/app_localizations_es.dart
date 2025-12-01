@@ -82,6 +82,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get resetPasswordButton => 'Restablecer Contraseña';
 
   @override
+  String get forgotPasswordTitle => 'Olvidé mi Contraseña';
+
+  @override
+  String get forgotPasswordDescription =>
+      'Ingresa tu dirección de correo electrónico y te enviaremos un código de verificación para restablecer tu contraseña';
+
+  @override
+  String get emailHint => 'Ingresa tu correo electrónico';
+
+  @override
+  String get emailInvalid => 'Por favor ingresa un correo válido';
+
+  @override
+  String get sendVerificationCodeButton => 'Enviar Código de Verificación';
+
+  @override
   String get verifyResetCodeTitle => 'Ingresa tu Código de Verificación';
 
   @override

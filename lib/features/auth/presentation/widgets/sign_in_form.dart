@@ -3,6 +3,7 @@ import 'package:demy_teachers/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -96,7 +97,7 @@ class _SignInFormState extends State<SignInForm> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () => context.pushNamed('forgot-password'),
                 child: Text(
                   loc.forgotPassword,
                   style: TextStyle(color: colorScheme.primary),

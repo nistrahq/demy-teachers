@@ -68,7 +68,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
 
     result.fold(
       (failure) => emit(ResetPasswordFailure(failure.message)),
-      (_) => emit(ResetPasswordSuccess()),
+      (user) => emit(ResetPasswordSuccess()),
     );
   }
 }
