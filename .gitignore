@@ -43,3 +43,10 @@ android/local.properties
 
 # Flutter
 !.metadata
+
+# Key properties file
+key.properties
+
+# Keystore files
+*.jks
+*.keystore
