@@ -71,4 +71,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registerAttendanceButtonLabel => 'Take Attendance';
+
+  @override
+  String get attendanceReportTitle => 'Attendance Report';
+
+  @override
+  String get studentsLabel => 'Students';
+
+  @override
+  String get saveAttendanceButton => 'Save Attendance';
+
+  @override
+  String get attendanceSavedSuccess => 'Attendance saved successfully';
+
+  @override
+  String get courseLabel => 'Course';
+
+  @override
+  String get startDateLabel => 'Start Date';
+
+  @override
+  String get endDateLabel => 'End Date';
+
+  @override
+  String get statusPresentAbbr => 'P';
+
+  @override
+  String get statusExcusedAbbr => 'E';
+
+  @override
+  String get statusAbsentAbbr => 'A';
+
+  @override
+  String errorLoadingStudents(String error) {
+    return 'Error loading student list: $error';
+  }
+
+  @override
+  String get viewAttendanceReportButton => 'View Attendance Report';
+
+  @override
+  String get teachingScheduleButton => 'Teaching Schedule';
+
+  @override
+  String get viewNotificationsButton => 'View Notifications';
+
+  @override
+  String get todayScheduleTitle => 'Today Schedule';
+
+  @override
+  String get viewAllLink => 'View all >';
 }

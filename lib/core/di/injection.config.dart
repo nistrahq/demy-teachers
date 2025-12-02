@@ -29,10 +29,14 @@ import 'package:demy_teachers/features/attendance/data/di/attendance_module.dart
     as _i642;
 import 'package:demy_teachers/features/attendance/domain/repositories/attendance_repository.dart'
     as _i175;
+import 'package:demy_teachers/features/attendance/domain/usecases/get_attendance_history_use_case.dart'
+    as _i773;
 import 'package:demy_teachers/features/attendance/domain/usecases/get_students_use_case.dart'
     as _i422;
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_bloc.dart'
     as _i703;
+import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_report_bloc.dart'
+    as _i847;
 import 'package:demy_teachers/features/auth/data/datasources/auth_local_data_source.dart'
     as _i883;
 import 'package:demy_teachers/features/auth/data/datasources/auth_remote_data_source.dart'
@@ -136,6 +140,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i175.AttendanceRepository>(),
       ),
     );
+    gh.lazySingleton<_i773.GetAttendanceHistoryUseCase>(
+      () => attendanceModule.getAttendanceHistoryUseCase(
+        gh<_i175.AttendanceRepository>(),
+      ),
+    );
     gh.lazySingleton<_i87.SignInUser>(
       () => authModule.signInUser(gh<_i604.AuthRepository>()),
     );
@@ -147,6 +156,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i871.SplashBloc>(
       () => _i871.SplashBloc(gh<_i604.AuthRepository>()),
+    );
+    gh.factory<_i847.AttendanceReportBloc>(
+      () => attendanceModule.attendanceReportBloc(
+        gh<_i422.GetStudentsUseCase>(),
+        gh<_i773.GetAttendanceHistoryUseCase>(),
+      ),
     );
     gh.factory<_i536.AuthBloc>(
       () => authModule.authBloc(

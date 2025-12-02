@@ -23,5 +23,21 @@
   "registerAttendanceButtonLabel": "Registrar Asistencia",
     "@registerAttendanceButtonLabel": {
         "description": "Label for attendance registration button"
-    }
+    },
+    "attendanceReportTitle": "Reporte de Asistencia",
+  "studentsLabel": "Estudiantes",
+  "saveAttendanceButton": "Guardar Asistencia",
+  "attendanceSavedSuccess": "Asistencia guardada exitosamente",
+  "courseLabel": "Curso",
+  "startDateLabel": "Fecha Inicio",
+  "endDateLabel": "Fecha Fin",
+  "statusPresentAbbr": "A",
+  "statusExcusedAbbr": "J",
+  "statusAbsentAbbr": "F",
+  "errorLoadingStudents": "Error al cargar la lista: {error}",
+  "viewAttendanceReportButton": "Ver Reporte de Asistencia",
+  "teachingScheduleButton": "Horario de Clases",
+  "viewNotificationsButton": "Ver Notificaciones",
+  "todayScheduleTitle": "Agenda de Hoy",
+  "viewAllLink": "Ver todo >"
 }

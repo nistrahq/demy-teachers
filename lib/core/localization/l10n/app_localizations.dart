@@ -223,6 +223,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Take Attendance'**
   String get registerAttendanceButtonLabel;
+
+  /// No description provided for @attendanceReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance Report'**
+  String get attendanceReportTitle;
+
+  /// No description provided for @studentsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Students'**
+  String get studentsLabel;
+
+  /// No description provided for @saveAttendanceButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Attendance'**
+  String get saveAttendanceButton;
+
+  /// No description provided for @attendanceSavedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance saved successfully'**
+  String get attendanceSavedSuccess;
+
+  /// No description provided for @courseLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Course'**
+  String get courseLabel;
+
+  /// No description provided for @startDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get startDateLabel;
+
+  /// No description provided for @endDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get endDateLabel;
+
+  /// No description provided for @statusPresentAbbr.
+  ///
+  /// In en, this message translates to:
+  /// **'P'**
+  String get statusPresentAbbr;
+
+  /// No description provided for @statusExcusedAbbr.
+  ///
+  /// In en, this message translates to:
+  /// **'E'**
+  String get statusExcusedAbbr;
+
+  /// No description provided for @statusAbsentAbbr.
+  ///
+  /// In en, this message translates to:
+  /// **'A'**
+  String get statusAbsentAbbr;
+
+  /// No description provided for @errorLoadingStudents.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading student list: {error}'**
+  String errorLoadingStudents(String error);
+
+  /// No description provided for @viewAttendanceReportButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View Attendance Report'**
+  String get viewAttendanceReportButton;
+
+  /// No description provided for @teachingScheduleButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Teaching Schedule'**
+  String get teachingScheduleButton;
+
+  /// No description provided for @viewNotificationsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View Notifications'**
+  String get viewNotificationsButton;
+
+  /// No description provided for @todayScheduleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today Schedule'**
+  String get todayScheduleTitle;
+
+  /// No description provided for @viewAllLink.
+  ///
+  /// In en, this message translates to:
+  /// **'View all >'**
+  String get viewAllLink;
 }
 
 class _AppLocalizationsDelegate
