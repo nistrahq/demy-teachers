@@ -17,7 +17,7 @@ class AttendanceBloc extends Bloc<AttendanceEvent, AttendanceState> {
 
   Future<void> _onLoadStudents(LoadStudentsEvent event, Emitter<AttendanceState> emit) async {
     emit(AttendanceLoading());
-    final result = await getStudentsUseCase(NoParams());
+    final result = await getStudentsUseCase(event.classSessionId);
     
     result.fold(
       (failure) => emit(AttendanceFailure(failure.message)),
@@ -61,7 +61,11 @@ class AttendanceBloc extends Bloc<AttendanceEvent, AttendanceState> {
       );
 
       result.fold(
-        (failure) => emit(AttendanceFailure(failure.message)),
+        (failure) {
+          emit(currentState.copyWith(
+            errorMessage: failure.message
+          ));
+        },
         (_) => emit(AttendanceSuccess()),
       );
     }
