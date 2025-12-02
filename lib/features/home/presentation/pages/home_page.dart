@@ -1,3 +1,4 @@
+import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
 import 'package:demy_teachers/features/home/presentation/widgets/quick_access_card.dart';
 import 'package:demy_teachers/features/home/presentation/widgets/today_schedule_home.dart';
 import 'package:demy_teachers/features/profile/presentation/blocs/profile_bloc.dart';
@@ -12,11 +13,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final t = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // --- 1. Header Fijo (Fondo azul/morado) ---
+         
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
@@ -79,16 +81,10 @@ class HomePage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: QuickAccessCard(
-                        icon: Icons.calendar_today,
-                        title: 'Attendance Report', 
+                        icon: Icons.assignment_outlined,
+                        title: t.viewAttendanceReportButton, 
                         onTap: () {
-                          context.pushNamed(
-                            'take_attendance',
-                            extra: {
-                              'sessionId': 4, // ID de prueba (debe existir en tu BD)
-                              'courseName': 'Chemistry - I239',
-                            },
-                          );
+                          context.pushNamed('attendance_report');
                         },
                       ),
                     ),
@@ -99,7 +95,7 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       child: QuickAccessCard(
                         icon: Icons.access_time,
-                        title: 'Teaching Schedule', 
+                        title: t.teachingScheduleButton, 
                         onTap: () => context.go('/teaching-schedule'),
                       ),
                     ),
@@ -110,7 +106,7 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       child: QuickAccessCard(
                         icon: Icons.notifications,
-                        title: 'View Notifications',
+                        title: t.viewNotificationsButton,
                         onTap: () {},
                       ),
                     ),
@@ -129,12 +125,12 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Today Schedule', 
+                    t.todayScheduleTitle, 
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   TextButton(
                     onPressed: () => context.go('/teaching-schedule'),
-                    child: Text('View all >', 
+                    child: Text(t.viewAllLink, 
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: colorScheme.primary)),
                   ),
                 ],
