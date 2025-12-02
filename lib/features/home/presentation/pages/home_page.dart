@@ -37,12 +37,12 @@ class HomePage extends StatelessWidget {
                       const SizedBox(width: 12),
                       BlocBuilder<ProfileBloc, ProfileState>(
                         builder: (context, state) {
-                          String name = 'Usuario';
-                          if (state is ProfileLoaded) name = state.teacher.fullName;
-                          if (state is ProfileLoading) name = 'Loading...';
+                          String displayName = 'Usuario';
+                          if (state is ProfileLoading) displayName = 'Loading...';
+                          if (state is ProfileLoaded) displayName = state.teacher.fullName;
 
                           return Text(
-                            name,
+                            displayName,
                             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,

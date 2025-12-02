@@ -1,17 +1,17 @@
 
 import 'package:demy_teachers/features/attendance/presentation/navigation/attendance_routes.dart';
 import 'package:demy_teachers/features/auth/presentation/navigation/auth_routes.dart';
+import 'package:demy_teachers/features/auth/presentation/pages/forgot_password_page.dart';
+import 'package:demy_teachers/features/auth/presentation/pages/reset_password_page.dart';
+import 'package:demy_teachers/features/auth/presentation/pages/reset_password_success_page.dart';
+import 'package:demy_teachers/features/auth/presentation/pages/verify_reset_code_page.dart';
 import 'package:demy_teachers/features/home/presentation/pages/home_page.dart';
-import 'package:demy_teachers/features/profile/presentation/blocs/profile_bloc.dart';
-import 'package:demy_teachers/features/profile/presentation/blocs/profile_event.dart';
 import 'package:demy_teachers/features/profile/presentation/pages/profile_page.dart';
 import 'package:demy_teachers/features/settings/presentation/pages/settings_page.dart';
 import 'package:demy_teachers/features/splash/presentation/navigation/splash_routes.dart';
 import 'package:demy_teachers/shared/widgets/bottom_navigation_bar_widget.dart';
 import 'package:demy_teachers/features/schedule/presentation/navigation/schedule_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -23,13 +23,44 @@ final GoRouter appRouter = GoRouter(
     ...attendanceRoutes,
 
 
+    GoRoute(
+      path: '/forgot-password',
+      name: 'forgot-password',
+      builder: (context, state) => const ForgotPasswordPage(),
+    ),
+
+    GoRoute(
+      path: '/verify-reset-code',
+      name: 'verify-reset-code',
+      builder: (context, state) {
+        final Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+        return VerifyResetCodePage(
+          emailAddress: args['emailAddress'] as String,
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/reset-password',
+      name: 'reset-password',
+      builder: (context, state) {
+        final Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+        return ResetPasswordPage(
+          emailAddress: args['emailAddress'] as String,
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/reset-password-success',
+      name: 'reset-password-success',
+      builder: (context, state) => const ResetPasswordSuccessPage(),
+    ),
+
     // --- Aquí empieza el Menú con BottomNavigationBar ---
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return BlocProvider(
-          create: (_) =>
-              GetIt.instance<ProfileBloc>()..add(const LoadProfileRequested()),
-          child: Scaffold(
+          return Scaffold(
             body: navigationShell,
             bottomNavigationBar: BottomNavigationBarWidget(
               currentIndex: navigationShell.currentIndex,
@@ -38,8 +69,7 @@ final GoRouter appRouter = GoRouter(
                 initialLocation: index == navigationShell.currentIndex,
               ),
             ),
-          ),
-        );
+          );
       },
 
       branches: [

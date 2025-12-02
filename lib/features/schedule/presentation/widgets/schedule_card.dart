@@ -1,5 +1,10 @@
 import 'package:demy_teachers/features/schedule/domain/entities/class_session.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_bloc.dart';
+import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_event.dart';
+
 
 class ScheduleCard extends StatelessWidget {
   final ClassSession item;
@@ -121,9 +126,22 @@ class ScheduleCard extends StatelessWidget {
                     child: IconButton(
                       icon: const Icon(Icons.edit_calendar_outlined),
                       color: rescheduleIconColor,
-                      onPressed: () {
-                        // Acción de Navegación
-                      },
+                      onPressed: () async { // HACEMOS LA FUNCIÓN ASÍNCRONA
+                            // 2. Navegación esperando el resultado (bool)
+                            final result = await context.pushNamed<bool>(
+                              'reschedule',
+                              pathParameters: {
+                                'sessionId': item.id.toString(),
+                              },
+                              extra: item, 
+                            );
+
+                            // 🎯 LÓGICA DE RECARGA: Si el resultado es true (éxito al reprogramar), recargamos la agenda.
+                            if (result == true) {
+                                // Llamamos al ScheduleBloc de la pantalla superior.
+                                context.read<ScheduleBloc>().add(ScheduleWeeklyScheduleRequested());
+                            }
+                        },
                     ),
                   ),
                 ],

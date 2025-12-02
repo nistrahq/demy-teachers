@@ -5,4 +5,12 @@ import 'package:demy_teachers/features/schedule/domain/entities/class_session.da
 
 abstract class ScheduleRepository {
   Future<Either<Failure,List<ClassSession>>> getScheduleForTeacher();
+
+  Future<Either<Failure, void>> rescheduleClassSession(
+    int sessionId,
+    int classroomId,
+    String startTime,
+    String endTime,
+    String dayOfWeek
+  );
 }
