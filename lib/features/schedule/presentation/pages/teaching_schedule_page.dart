@@ -1,3 +1,4 @@
+import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
 import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_bloc.dart';
 import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_event.dart';
 import 'package:demy_teachers/features/schedule/presentation/widgets/day_selection_bar.dart';
@@ -14,6 +15,7 @@ class TeachingSchedulePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).colorScheme.primaryContainer;
+    final t = AppLocalizations.of(context);
 
     return BlocProvider(
       create: (_) => GetIt.I<ScheduleBloc>()..add(ScheduleWeeklyScheduleRequested()),
@@ -25,9 +27,9 @@ class TeachingSchedulePage extends StatelessWidget {
           centerTitle: true,
           
           // Título blanco
-          title: const Text(
-            'Teaching Schedule',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          title: Text(
+            t.teachingScheduleTitle,
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           
           // Botón de retroceso al Home

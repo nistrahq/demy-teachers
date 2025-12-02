@@ -136,6 +136,81 @@ class AppLocalizationsEs extends AppLocalizations {
       'Has iniciado sesión en la aplicación, comienza a gestionar tus horarios, asistencia y más.';
 
   @override
+  String get teachingScheduleTitle => 'Horario de Clases';
+
+  @override
+  String get teachingRescheduleTitle => 'Reprogramar Clase';
+
+  @override
+  String get dayOfWeek => 'Día de la Semana';
+
+  @override
+  String get startTime => 'Hora de Inicio';
+
+  @override
+  String get endTime => 'Hora de Fin';
+
+  @override
+  String get course => 'Curso';
+
+  @override
+  String get campus => 'Campus';
+
+  @override
+  String get classroom => 'Aula';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get save => 'Guardar';
+
+  @override
+  String get confirmReschedule => 'Confirmar Reprogramación';
+
+  @override
+  String get confirmRescheduleMessage =>
+      '¿Estás seguro de que quieres reprogramar esta clase con los cambios seleccionados?';
+
+  @override
+  String get yesSaveChanges => 'Sí, Guardar Cambios';
+
+  @override
+  String get rescheduledSuccessfully => '¡Reprogramado exitosamente!';
+
+  @override
+  String get selectDay => 'Seleccionar Día';
+
+  @override
+  String get monday => 'Lunes';
+
+  @override
+  String get tuesday => 'Martes';
+
+  @override
+  String get wednesday => 'Miércoles';
+
+  @override
+  String get thursday => 'Jueves';
+
+  @override
+  String get friday => 'Viernes';
+
+  @override
+  String get saturday => 'Sábado';
+
+  @override
+  String get sunday => 'Domingo';
+
+  @override
+  String errorLoadingSchedule(String error) {
+    return 'Error al cargar el horario: $error';
+  }
+
+  @override
+  String get noClassesScheduled => 'No hay clases programadas para este día.';
+
+  @override
   String get phoneNumberLabel => 'Número de teléfono';
 
   @override

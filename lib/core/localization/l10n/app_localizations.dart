@@ -338,6 +338,150 @@ abstract class AppLocalizations {
   /// **'You have successfully signed in to the app, start managing your schedules, attendance, and more.'**
   String get welcomeNotificationDescription;
 
+  /// No description provided for @teachingScheduleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Teaching Schedule'**
+  String get teachingScheduleTitle;
+
+  /// No description provided for @teachingRescheduleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Teaching Reschedule'**
+  String get teachingRescheduleTitle;
+
+  /// No description provided for @dayOfWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Day of Week'**
+  String get dayOfWeek;
+
+  /// No description provided for @startTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Time'**
+  String get startTime;
+
+  /// No description provided for @endTime.
+  ///
+  /// In en, this message translates to:
+  /// **'End Time'**
+  String get endTime;
+
+  /// No description provided for @course.
+  ///
+  /// In en, this message translates to:
+  /// **'Course'**
+  String get course;
+
+  /// No description provided for @campus.
+  ///
+  /// In en, this message translates to:
+  /// **'Campus'**
+  String get campus;
+
+  /// No description provided for @classroom.
+  ///
+  /// In en, this message translates to:
+  /// **'Classroom'**
+  String get classroom;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @confirmReschedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Reschedule'**
+  String get confirmReschedule;
+
+  /// No description provided for @confirmRescheduleMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to reschedule this class with the selected changes?'**
+  String get confirmRescheduleMessage;
+
+  /// No description provided for @yesSaveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Save Changes'**
+  String get yesSaveChanges;
+
+  /// No description provided for @rescheduledSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Rescheduled successfully!'**
+  String get rescheduledSuccessfully;
+
+  /// No description provided for @selectDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Day'**
+  String get selectDay;
+
+  /// No description provided for @monday.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday'**
+  String get monday;
+
+  /// No description provided for @tuesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuesday'**
+  String get tuesday;
+
+  /// No description provided for @wednesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Wednesday'**
+  String get wednesday;
+
+  /// No description provided for @thursday.
+  ///
+  /// In en, this message translates to:
+  /// **'Thursday'**
+  String get thursday;
+
+  /// No description provided for @friday.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday'**
+  String get friday;
+
+  /// No description provided for @saturday.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturday'**
+  String get saturday;
+
+  /// No description provided for @sunday.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday'**
+  String get sunday;
+
+  /// No description provided for @errorLoadingSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading schedule: {error}'**
+  String errorLoadingSchedule(String error);
+
+  /// No description provided for @noClassesScheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'No classes scheduled for this day.'**
+  String get noClassesScheduled;
+
   /// No description provided for @phoneNumberLabel.
   ///
   /// In en, this message translates to:

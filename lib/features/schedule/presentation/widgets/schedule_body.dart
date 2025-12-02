@@ -1,3 +1,4 @@
+import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
 import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_bloc.dart';
 import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_state.dart';
 import 'package:demy_teachers/features/schedule/presentation/widgets/schedule_card.dart';
@@ -9,6 +10,8 @@ class ScheduleBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
+
     return BlocBuilder<ScheduleBloc, ScheduleState>(
       builder: (context, state) {
         if (state is ScheduleLoading || state is ScheduleInitial) {
@@ -18,13 +21,13 @@ class ScheduleBody extends StatelessWidget {
           return Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text('Error al cargar el horario: ${state.message}'),
+              child: Text(t.errorLoadingSchedule(state.message)),
             ),
           );
         }
         if (state is ScheduleLoaded) {
           if (state.dailySessions.isEmpty) {
-            return Center(child: Text('No hay clases programadas para este día.'));
+            return Center(child: Text(t.noClassesScheduled));
           }
           return ListView.builder(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 16.0), 
