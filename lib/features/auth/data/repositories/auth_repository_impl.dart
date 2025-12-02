@@ -23,6 +23,34 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, void>> requestResetPassword(String emailAddress) async {
+    return safeCall(() async {
+      await remoteDataSource.requestResetPassword(emailAddress);
+    });
+  }
+
+  @override
+  Future<Either<Failure, void>> verifyResetCode(String emailAddress, String code) async {
+    return safeCall(() async {
+      await remoteDataSource.verifyResetCode(emailAddress, code);
+    });
+  }
+
+  @override
+  Future<Either<Failure, User>> resetPassword(
+    String emailAddress,
+    String password,
+    String confirmPassword,
+  ) async {
+    return safeCall(() async {
+      final user = await remoteDataSource.resetPassword(emailAddress, password, confirmPassword);
+      await localDataSource.saveToken(user.token);
+      await localDataSource.saveUser(id: user.id, email: user.email);
+      return user;
+    });
+  }
+
+  @override
   Future<String?> getCachedToken() async {
     return await localDataSource.getToken();
   }

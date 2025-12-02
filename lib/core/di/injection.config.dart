@@ -46,10 +46,18 @@ import 'package:demy_teachers/features/auth/data/services/active_user_provider.d
     as _i4;
 import 'package:demy_teachers/features/auth/domain/repositories/auth_repository.dart'
     as _i604;
+import 'package:demy_teachers/features/auth/domain/usecases/request_reset_password_use_case.dart'
+    as _i1013;
+import 'package:demy_teachers/features/auth/domain/usecases/reset_password_use_case.dart'
+    as _i579;
 import 'package:demy_teachers/features/auth/domain/usecases/sign_in_use_case.dart'
     as _i87;
+import 'package:demy_teachers/features/auth/domain/usecases/verify_reset_code_use_case.dart'
+    as _i998;
 import 'package:demy_teachers/features/auth/presentation/blocs/auth_bloc.dart'
     as _i536;
+import 'package:demy_teachers/features/auth/presentation/blocs/reset_password_bloc.dart'
+    as _i406;
 import 'package:demy_teachers/features/profile/data/datasources/profile_remote_data_source.dart'
     as _i498;
 import 'package:demy_teachers/features/profile/data/di/profile_module.dart'
@@ -68,6 +76,10 @@ import 'package:demy_teachers/features/schedule/domain/repositories/schedule_rep
     as _i952;
 import 'package:demy_teachers/features/schedule/domain/usecases/get_schedule_for_teacher_use_case.dart'
     as _i57;
+import 'package:demy_teachers/features/schedule/domain/usecases/reschedule_class_session_use_case.dart'
+    as _i363;
+import 'package:demy_teachers/features/schedule/presentation/blocs/reschedule_bloc.dart'
+    as _i866;
 import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_bloc.dart'
     as _i460;
 import 'package:demy_teachers/features/splash/presentation/blocs/splash_bloc.dart'
@@ -148,6 +160,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i87.SignInUser>(
       () => authModule.signInUser(gh<_i604.AuthRepository>()),
     );
+    gh.lazySingleton<_i1013.RequestResetPasswordUseCase>(
+      () => authModule.requestResetPasswordUseCase(gh<_i604.AuthRepository>()),
+    );
+    gh.lazySingleton<_i998.VerifyResetCodeUseCase>(
+      () => authModule.verifyResetCodeUseCase(gh<_i604.AuthRepository>()),
+    );
+    gh.lazySingleton<_i579.ResetPasswordUseCase>(
+      () => authModule.resetPasswordUseCase(gh<_i604.AuthRepository>()),
+    );
     gh.factory<_i703.AttendanceBloc>(
       () => attendanceModule.attendanceBloc(
         gh<_i422.GetStudentsUseCase>(),
@@ -157,10 +178,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i871.SplashBloc>(
       () => _i871.SplashBloc(gh<_i604.AuthRepository>()),
     );
-    gh.factory<_i847.AttendanceReportBloc>(
-      () => attendanceModule.attendanceReportBloc(
-        gh<_i422.GetStudentsUseCase>(),
-        gh<_i773.GetAttendanceHistoryUseCase>(),
+    gh.factory<_i406.ResetPasswordBloc>(
+      () => authModule.resetPasswordBloc(
+        gh<_i1013.RequestResetPasswordUseCase>(),
+        gh<_i998.VerifyResetCodeUseCase>(),
+        gh<_i579.ResetPasswordUseCase>(),
       ),
     );
     gh.factory<_i536.AuthBloc>(
@@ -194,11 +216,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i57.GetScheduleForTeacher>(
       () => scheduleModule.getSchedules(gh<_i952.ScheduleRepository>()),
     );
+    gh.lazySingleton<_i363.RescheduleClassSession>(
+      () => scheduleModule.rescheduleSession(gh<_i952.ScheduleRepository>()),
+    );
     gh.factory<_i460.ScheduleBloc>(
       () => scheduleModule.scheduleBloc(gh<_i57.GetScheduleForTeacher>()),
     );
     gh.factory<_i725.ProfileBloc>(
       () => profileModule.profileBloc(gh<_i999.GetCurrentTeacherUseCase>()),
+    );
+    gh.factory<_i866.RescheduleBloc>(
+      () => scheduleModule.rescheduleBloc(gh<_i363.RescheduleClassSession>()),
     );
     return this;
   }
