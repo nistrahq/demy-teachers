@@ -107,7 +107,7 @@ class HomePage extends StatelessWidget {
                       child: QuickAccessCard(
                         icon: Icons.notifications,
                         title: t.viewNotificationsButton,
-                        onTap: () {},
+                        onTap: () => context.go('/notifications'),
                       ),
                     ),
                   ],

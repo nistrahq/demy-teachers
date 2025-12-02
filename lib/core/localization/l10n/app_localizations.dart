@@ -320,6 +320,24 @@ abstract class AppLocalizations {
   /// **'View all >'**
   String get viewAllLink;
 
+  /// No description provided for @notificationsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsPageTitle;
+
+  /// No description provided for @welcomeNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Demy for Teachers'**
+  String get welcomeNotificationTitle;
+
+  /// No description provided for @welcomeNotificationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You have successfully signed in to the app, start managing your schedules, attendance, and more.'**
+  String get welcomeNotificationDescription;
+
   /// No description provided for @phoneNumberLabel.
   ///
   /// In en, this message translates to:

@@ -126,6 +126,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get viewAllLink => 'Ver todo >';
 
   @override
+  String get notificationsPageTitle => 'Notificaciones';
+
+  @override
+  String get welcomeNotificationTitle => 'Bienvenido a Demy for Teachers';
+
+  @override
+  String get welcomeNotificationDescription =>
+      'Has iniciado sesión en la aplicación, comienza a gestionar tus horarios, asistencia y más.';
+
+  @override
   String get phoneNumberLabel => 'Número de teléfono';
 
   @override
