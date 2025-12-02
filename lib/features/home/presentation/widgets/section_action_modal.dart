@@ -10,7 +10,7 @@ class SessionActionModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = AppLocalizations.of(context)!;
+    final t = AppLocalizations.of(context);
 
     return Container(
       padding: const EdgeInsets.all(24.0),

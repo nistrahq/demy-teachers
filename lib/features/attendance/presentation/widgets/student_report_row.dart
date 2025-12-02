@@ -43,7 +43,6 @@ class StudentReportRow extends StatelessWidget {
   }
 }
 
-// Widget privado pequeño para la celda
 class _DataCell extends StatelessWidget {
   final String text;
   const _DataCell({required this.text});

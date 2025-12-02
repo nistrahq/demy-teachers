@@ -1,4 +1,3 @@
-  import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
   import 'package:demy_teachers/features/home/presentation/widgets/section_action_modal.dart';
   import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_bloc.dart';
   import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_event.dart';
@@ -9,7 +8,7 @@
   import 'package:get_it/get_it.dart';
   import 'package:intl/intl.dart';
 
-  // Helper Widget para la tarjeta de horario
+
   class _SimpleHomeScheduleCard extends StatelessWidget {
     final ClassSession session;
     final Color cardColor;
@@ -22,7 +21,6 @@
     @override
     Widget build(BuildContext context) {
       final colorScheme = Theme.of(context).colorScheme;
-      final t = AppLocalizations.of(context)!;
 
   
       final now = DateTime.now();
@@ -36,7 +34,6 @@
             child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: () {
-            // Lógica para abrir el modal
             showModalBottomSheet(
               context: context,
               backgroundColor: Colors.transparent, 
@@ -64,17 +61,17 @@
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(date, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
-                    // Mes actual (Ej: Nov)
+
                     Text(month, style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.white)),],
                 ),
               ),
               const SizedBox(width: 12),
-              // Detalles de la Clase
+
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Título del Curso (más grande, color primario)
+
                     Text(
                       session.course.name,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(

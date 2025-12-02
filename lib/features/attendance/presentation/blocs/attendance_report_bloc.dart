@@ -9,11 +9,11 @@ import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AttendanceReportBloc extends Bloc<AttendanceReportEvent, AttendanceReportState> {
-  // Inyectamos los DOS casos de uso
+  
   final GetStudentsUseCase getStudentsUseCase;
-  final GetAttendanceHistoryUseCase getAttendanceHistoryUseCase; // <--- NUEVO
+  final GetAttendanceHistoryUseCase getAttendanceHistoryUseCase; 
 
-  List<AttendanceHistory> _allHistory = []; // Ahora usa la Entidad, no el DTO
+  List<AttendanceHistory> _allHistory = [];
   List<Student> _allStudents = [];
 
   AttendanceReportBloc({

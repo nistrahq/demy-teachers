@@ -12,7 +12,7 @@ class AttendanceLoaded extends AttendanceState {
 
   AttendanceLoaded({required this.classSessionId, required this.students,this.errorMessage,});
   
-  // Método copyWith para actualizar la lista inmutablemente
+  
   AttendanceLoaded copyWith({
     int? classSessionId,
     List<StudentAttendance>? students,

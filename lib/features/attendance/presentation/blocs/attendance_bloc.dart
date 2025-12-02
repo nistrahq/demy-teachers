@@ -1,4 +1,3 @@
-import 'package:demy_teachers/core/usecases/usecase.dart';
 import 'package:demy_teachers/features/attendance/domain/entities/student.dart';
 import 'package:demy_teachers/features/attendance/domain/usecases/get_students_use_case.dart';
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_event.dart';
@@ -22,7 +21,7 @@ class AttendanceBloc extends Bloc<AttendanceEvent, AttendanceState> {
     result.fold(
       (failure) => emit(AttendanceFailure(failure.message)),
       (students) {
-        // Inicializamos a todos con 'Present' por defecto o 'None'
+        
         final attendanceList = students.map((s) => StudentAttendance(
           student: s, 
           status: AttendanceStatus.present // Default
@@ -37,7 +36,7 @@ class AttendanceBloc extends Bloc<AttendanceEvent, AttendanceState> {
     if (state is AttendanceLoaded) {
       final currentState = state as AttendanceLoaded;
       
-      // Creamos una nueva lista actualizando el item específico
+      
       final updatedList = currentState.students.map((item) {
         if (item.student.dni == event.studentDni) {
           return StudentAttendance(student: item.student, status: event.newStatus);

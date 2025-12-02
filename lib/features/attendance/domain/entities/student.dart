@@ -1,7 +1,7 @@
 class Student {
   final String dni;
   final String fullName;
-  final String photoUrl; // Para el UI
+  final String photoUrl;
 
   const Student({
     required this.dni, 
@@ -10,7 +10,6 @@ class Student {
   });
 }
 
-// Una entidad auxiliar para manejar el estado en la UI antes de enviar
 enum AttendanceStatus { present, absent, excused, none }
 
 class StudentAttendance {

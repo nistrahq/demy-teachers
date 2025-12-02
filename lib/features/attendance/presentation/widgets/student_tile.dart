@@ -15,7 +15,7 @@ class StudentAttendanceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = AppLocalizations.of(context)!;
+    final t = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Row(
@@ -92,9 +92,9 @@ class _StatusButton extends StatelessWidget {
         width: 35,
         height: 35,
         decoration: BoxDecoration(
-          color: isSelected ? color : Colors.transparent, // Relleno si seleccionado
+          color: isSelected ? color : Colors.transparent,
           shape: BoxShape.circle,
-          border: Border.all(color: color.withOpacity(0.5), width: 1), // Borde siempre
+          border: Border.all(color: color.withOpacity(0.5), width: 1), 
         ),
         alignment: Alignment.center,
         child: Text(

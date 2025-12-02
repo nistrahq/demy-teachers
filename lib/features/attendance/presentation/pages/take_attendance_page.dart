@@ -10,14 +10,14 @@ import 'package:go_router/go_router.dart';
 
 class TakeAttendancePage extends StatelessWidget {
   final int classSessionId;
-  final String courseName; // Pásalo desde la navegación
+  final String courseName;
 
   const TakeAttendancePage({super.key, required this.classSessionId, required this.courseName});
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
-    final t = AppLocalizations.of(context)!;
+    final t = AppLocalizations.of(context);
 
     return BlocProvider(
       create: (_) => GetIt.I<AttendanceBloc>()..add(LoadStudentsEvent(classSessionId)),
@@ -29,20 +29,17 @@ class TakeAttendancePage extends StatelessWidget {
               color: Colors.white, 
               fontWeight: FontWeight.bold
             ),),
-          // 1. AQUÍ VA EL LEADING (El botón de atrás)
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white), // Flecha blanca
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               if (context.canPop()) {
-                context.pop(); // Regresa a la pantalla anterior
+                context.pop();
               } else {
-                context.go('/home'); // Si no puede volver, va al home
+                context.go('/home');
               }
             },
           ),
           
-           // Título de la imagen
-          // ... estilos
         ),
         body: BlocConsumer<AttendanceBloc, AttendanceState>(
           listener: (context, state) {
@@ -55,7 +52,7 @@ class TakeAttendancePage extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.errorMessage!),
-                  backgroundColor: Colors.red, // Rojo para errores
+                  backgroundColor: Colors.red, 
                 )
               );
             }
@@ -71,10 +68,8 @@ class TakeAttendancePage extends StatelessWidget {
             if (state is AttendanceLoaded) {
               return Column(
                 children: [
-                  // Info Cards (Fecha, Curso) como en la imagen
                   _buildHeaderInfo(courseName, t),
                   
-                  // Cabecera de la tabla (Students, A, T, J/P)
                    Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                     child: Row(
@@ -115,7 +110,6 @@ class TakeAttendancePage extends StatelessWidget {
                     ),
                   ),
 
-                  // Botón de guardar
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: ElevatedButton(
@@ -144,8 +138,7 @@ class TakeAttendancePage extends StatelessWidget {
   }
 
   Widget _buildHeaderInfo(String course, AppLocalizations t) {
-    // Aquí implementas los cards blancos de arriba (Start Date, Course, etc)
-    // Usa un Column con Card widgets.
+
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(

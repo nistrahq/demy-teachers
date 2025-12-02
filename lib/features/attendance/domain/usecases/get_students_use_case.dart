@@ -12,7 +12,7 @@ class GetStudentsUseCase implements UseCase<Either<Failure, List<Student>>,int> 
   Future<Either<Failure, List<Student>>> call(int classSessionId) => repository.getStudents(classSessionId);
 }
 
-// features/attendance/domain/usecases/register_attendance_use_case.dart
+
 class RegisterAttendanceParams {
   final int sessionId;
   final String date;

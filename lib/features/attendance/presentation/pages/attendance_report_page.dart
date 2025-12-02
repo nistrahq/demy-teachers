@@ -4,12 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-// 1. Imports de tus BLOCs y Estados
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_report_bloc.dart';
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_report_event.dart';
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_report_state.dart';
 
-// 2. Imports de tus Widgets separadados (Asegúrate que la ruta sea correcta)
 import 'package:demy_teachers/features/attendance/presentation/widgets/report_filter_card.dart';
 import 'package:demy_teachers/features/attendance/presentation/widgets/student_report_row.dart';
 
@@ -21,12 +19,12 @@ class AttendanceReportPage extends StatefulWidget {
 }
 
 class _AttendanceReportPageState extends State<AttendanceReportPage> {
-  // Estado local para alternar entre Porcentaje (%) y Cantidad (#)
+  
   bool showPercentage = true; 
 
   @override
   Widget build(BuildContext context) {
-    final t = AppLocalizations.of(context)!;
+    final t = AppLocalizations.of(context);
     
     return Scaffold(
       appBar: AppBar(
@@ -40,32 +38,24 @@ class _AttendanceReportPageState extends State<AttendanceReportPage> {
           onPressed: () => context.pop(),
         ),
       ),
-      // Inyección del Bloc
+      
       body: BlocProvider(
         create: (_) => GetIt.I<AttendanceReportBloc>()..add(LoadReportEvent()),
         child: BlocBuilder<AttendanceReportBloc, AttendanceReportState>(
           builder: (context, state) {
-            // Estado de Carga
+
             if (state is ReportLoading) {
               return const Center(child: CircularProgressIndicator());
             }
-            // Estado de Error
             if (state is ReportFailure) {
               return Center(child: Text("Error: ${state.message}"));
             }
             
-            // Estado Cargado (Aquí armamos la UI)
             if (state is ReportLoaded) {
               return Column(
                 children: [
-                  // ------------------------------------------------
-                  // 1. TARJETA DE FILTROS (Widget separado que importamos)
-                  // ------------------------------------------------
                   ReportFilterCard(state: state), 
 
-                  // ------------------------------------------------
-                  // 2. TOGGLE SWITCH (% / #) (Método local, ver abajo)
-                  // ------------------------------------------------
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
                     child: Row(
@@ -76,14 +66,9 @@ class _AttendanceReportPageState extends State<AttendanceReportPage> {
                     ),
                   ),
 
-                  // ------------------------------------------------
-                  // 3. CABECERA DE TABLA (Método local, ver abajo)
-                  // ------------------------------------------------
+
                   _buildTableHeader(t),
 
-                  // ------------------------------------------------
-                  // 4. LISTA DE ESTUDIANTES (Widget separado que importamos)
-                  // ------------------------------------------------
                   Expanded(
                     child: ListView.separated(
                       padding: const EdgeInsets.only(bottom: 20),
@@ -110,11 +95,7 @@ class _AttendanceReportPageState extends State<AttendanceReportPage> {
     );
   }
 
-  // ====================================================================
-  //  MÉTODOS PRIVADOS LOCALES (Estos son los "pequeños" que faltaban)
-  // ====================================================================
 
-  /// Construye el interruptor para cambiar entre % y #
   Widget _buildToggleSwitch() {
     return Container(
       height: 40,
@@ -132,7 +113,7 @@ class _AttendanceReportPageState extends State<AttendanceReportPage> {
     );
   }
 
-  /// Botón individual dentro del Toggle
+  
   Widget _toggleBtn(String text, bool isSelected, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
@@ -162,7 +143,6 @@ class _AttendanceReportPageState extends State<AttendanceReportPage> {
     );
   }
 
-  /// Construye la cabecera de la tabla (Students | A | T | J)
   Widget _buildTableHeader(t) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),

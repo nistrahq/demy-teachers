@@ -1,7 +1,7 @@
 import 'package:demy_teachers/features/attendance/presentation/pages/take_attendance_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:demy_teachers/features/attendance/presentation/pages/attendance_report_page.dart';
-// Importa también tu TakeAttendancePage si la tienes
+
 
 final attendanceRoutes = [
   GoRoute(
