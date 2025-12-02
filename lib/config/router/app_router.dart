@@ -6,6 +6,7 @@ import 'package:demy_teachers/features/auth/presentation/pages/reset_password_pa
 import 'package:demy_teachers/features/auth/presentation/pages/reset_password_success_page.dart';
 import 'package:demy_teachers/features/auth/presentation/pages/verify_reset_code_page.dart';
 import 'package:demy_teachers/features/home/presentation/pages/home_page.dart';
+import 'package:demy_teachers/features/notifications/presentation/navigation/notifications_routes.dart';
 import 'package:demy_teachers/features/profile/presentation/pages/profile_page.dart';
 import 'package:demy_teachers/features/settings/presentation/pages/settings_page.dart';
 import 'package:demy_teachers/features/splash/presentation/navigation/splash_routes.dart';
@@ -21,6 +22,7 @@ final GoRouter appRouter = GoRouter(
     ...authRoutes,
     ...scheduleRoutes,
     ...attendanceRoutes,
+    ...notificationsRoutes,
 
 
     GoRoute(

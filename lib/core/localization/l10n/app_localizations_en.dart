@@ -121,6 +121,93 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewAllLink => 'View all >';
+
+  @override
+  String get notificationsPageTitle => 'Notifications';
+
+  @override
+  String get welcomeNotificationTitle => 'Welcome to Demy for Teachers';
+
+  @override
+  String get welcomeNotificationDescription =>
+      'You have successfully signed in to the app, start managing your schedules, attendance, and more.';
+
+  @override
+  String get teachingScheduleTitle => 'Teaching Schedule';
+
+  @override
+  String get teachingRescheduleTitle => 'Teaching Reschedule';
+
+  @override
+  String get dayOfWeek => 'Day of Week';
+
+  @override
+  String get startTime => 'Start Time';
+
+  @override
+  String get endTime => 'End Time';
+
+  @override
+  String get course => 'Course';
+
+  @override
+  String get campus => 'Campus';
+
+  @override
+  String get classroom => 'Classroom';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get confirmReschedule => 'Confirm Reschedule';
+
+  @override
+  String get confirmRescheduleMessage =>
+      'Are you sure you want to reschedule this class with the selected changes?';
+
+  @override
+  String get yesSaveChanges => 'Yes, Save Changes';
+
+  @override
+  String get rescheduledSuccessfully => 'Rescheduled successfully!';
+
+  @override
+  String get selectDay => 'Select Day';
+
+  @override
+  String get monday => 'Monday';
+
+  @override
+  String get tuesday => 'Tuesday';
+
+  @override
+  String get wednesday => 'Wednesday';
+
+  @override
+  String get thursday => 'Thursday';
+
+  @override
+  String get friday => 'Friday';
+
+  @override
+  String get saturday => 'Saturday';
+
+  @override
+  String get sunday => 'Sunday';
+
+  @override
+  String errorLoadingSchedule(String error) {
+    return 'Error loading schedule: $error';
+  }
+
+  @override
+  String get noClassesScheduled => 'No classes scheduled for this day.';
+
+  @override
   String get phoneNumberLabel => 'Phone Number';
 
   @override

@@ -32,7 +32,7 @@ class _AttendanceReportPageState extends State<AttendanceReportPage> {
           t.attendanceReportTitle, 
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => context.pop(),

@@ -13,7 +13,7 @@ class PrivacyPolicyPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(loc.privacyPolicy),
         centerTitle: true,
-        backgroundColor: colorScheme.primary,
+        backgroundColor: colorScheme.primaryContainer,
         foregroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.white),
       ),

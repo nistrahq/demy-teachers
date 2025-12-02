@@ -1,3 +1,4 @@
+import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
 import 'package:demy_teachers/features/schedule/domain/entities/class_session.dart';
 import 'package:demy_teachers/features/schedule/presentation/blocs/reschedule_bloc.dart';
 import 'package:demy_teachers/features/schedule/presentation/blocs/reschedule_event.dart';
@@ -26,7 +27,8 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
   late final TimeOfDay originalStartTime;
   late final TimeOfDay originalEndTime;
   
-  final List<String> daysOfWeek = [
+  // Lista de días en inglés para la API
+  final List<String> daysOfWeekApi = [
     'Monday',
     'Tuesday',
     'Wednesday',
@@ -98,57 +100,87 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
   }
 
   // --- LÓGICA DEL DAY PICKER (SimpleDialog) ---
-  Future<void> _pickDay() async {
+  Future<void> _pickDay(BuildContext context) async {
+    final t = AppLocalizations.of(context);
+    final daysTranslated = [
+      t.monday,
+      t.tuesday,
+      t.wednesday,
+      t.thursday,
+      t.friday,
+      t.saturday,
+      t.sunday,
+    ];
+
     await showDialog(
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: const Text('Select Day'),
-          children: daysOfWeek.map((day) {
+          title: Text(t.selectDay),
+          children: List.generate(daysOfWeekApi.length, (index) {
+            final dayApi = daysOfWeekApi[index];
+            final dayDisplay = daysTranslated[index];
+            
             return SimpleDialogOption(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
               onPressed: () {
                 setState(() {
-                  selectedDay = day;
+                  selectedDay = dayApi;
                 });
                 Navigator.pop(context); // Cerrar el diálogo
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(day, style: const TextStyle(fontSize: 16)),
-                  if (selectedDay == day)
+                  Text(dayDisplay, style: const TextStyle(fontSize: 16)),
+                  if (selectedDay == dayApi)
                     Icon(Icons.check, color: Theme.of(context).colorScheme.primary, size: 20),
                 ],
               ),
             );
-          }).toList(),
+          }),
         );
       },
     );
   }
   
   // --- LÓGICA: Diálogo de Confirmación ---
-  Future<bool> _showConfirmationDialog() async {
+  Future<bool> _showConfirmationDialog(BuildContext context) async {
+    final t = AppLocalizations.of(context);
+    
     return await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Confirm Reschedule'),
-          content: const Text('Are you sure you want to reschedule this class with the selected changes?'),
+          title: Text(t.confirmReschedule),
+          content: Text(t.confirmRescheduleMessage),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Cancel'),
+              child: Text(t.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Yes, Save Changes'),
+              child: Text(t.yesSaveChanges),
             ),
           ],
         );
       },
     ) ?? false;
+  }
+
+  // Helper para traducir día de la semana de API a texto local
+  String _translateDay(String dayApi, AppLocalizations t) {
+    switch (dayApi) {
+      case 'Monday': return t.monday;
+      case 'Tuesday': return t.tuesday;
+      case 'Wednesday': return t.wednesday;
+      case 'Thursday': return t.thursday;
+      case 'Friday': return t.friday;
+      case 'Saturday': return t.saturday;
+      case 'Sunday': return t.sunday;
+      default: return dayApi;
+    }
   }
 
   // Helper para formatear TimeOfDay a String 24h para la API (ej: "18:30:00")
@@ -162,13 +194,14 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
   Widget build(BuildContext context) {
     final bool canSave = _hasChanges;
     final colorScheme = Theme.of(context).colorScheme;
+    final t = AppLocalizations.of(context);
 
     return BlocProvider(
       create: (_) => GetIt.I<RescheduleBloc>(),
       child: BlocConsumer<RescheduleBloc, RescheduleState>(
         listener: (context, state) {
           if (state is RescheduleSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Rescheduled successfully!')));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.rescheduledSuccessfully)));
             // 🎯 CAMBIO CLAVE 1: CERRAR LA PÁGINA DEVOLVIENDO 'true'
             context.pop(true); // Indica que la operación fue exitosa
           }
@@ -181,8 +214,8 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Teaching Reschedule', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-              backgroundColor: colorScheme.primary,
+              title: Text(t.teachingRescheduleTitle, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              backgroundColor: colorScheme.primaryContainer,
               iconTheme: const IconThemeData(color: Colors.white),
             ),
             body: Column(
@@ -200,22 +233,25 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
                         child: Column(
                           children: [
                             _buildSelectionTile(
+                              context: context,
                               icon: Icons.calendar_today,
-                              title: "Day of Week",
-                              value: selectedDay,
-                              onTap: _pickDay,
+                              title: t.dayOfWeek,
+                              value: _translateDay(selectedDay, t),
+                              onTap: () => _pickDay(context),
                             ),
                             const Divider(height: 1, indent: 50),
                             _buildSelectionTile(
+                              context: context,
                               icon: Icons.access_time,
-                              title: "Start Time",
+                              title: t.startTime,
                               value: startTime.format(context),
                               onTap: () => _pickTime(isStartTime: true),
                             ),
                             const Divider(height: 1, indent: 50),
                             _buildSelectionTile(
+                              context: context,
                               icon: Icons.access_time_filled,
-                              title: "End Time",
+                              title: t.endTime,
                               value: endTime.format(context),
                               onTap: () => _pickTime(isStartTime: false), 
                             ),
@@ -225,9 +261,9 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
                       const SizedBox(height: 16),
                       
                       // Campos grises (solo lectura o secundarios)
-                      _buildReadOnlyField("Course: ${widget.session.course.name} - ${widget.session.course.code}"),
+                      _buildReadOnlyField(context, "${t.course}: ${widget.session.course.name} - ${widget.session.course.code}"),
                       const SizedBox(height: 12),
-                      _buildReadOnlyField("Campus: ${widget.session.classroom.campus} - Classroom: ${widget.session.classroom.code}"),
+                      _buildReadOnlyField(context, "${t.campus}: ${widget.session.classroom.campus} - ${t.classroom}: ${widget.session.classroom.code}"),
                     ],
                   ),
                 ),
@@ -244,7 +280,7 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
-                          child: const Text("Cancel"),
+                          child: Text(t.cancel),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -254,7 +290,7 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
                           onPressed: (canSave && !isSaving)
                             ? () async {
                                 // 1. Mostrar diálogo de confirmación
-                                final confirmed = await _showConfirmationDialog();
+                                final confirmed = await _showConfirmationDialog(context);
 
                                 // 2. Si se confirma, enviar el evento BLoC
                                 if (confirmed) {
@@ -283,7 +319,7 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
                             ? const CircularProgressIndicator.adaptive(
                                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                               ) 
-                            : const Text("Save"),
+                            : Text(t.save),
                         ),
                       ),
                     ],
@@ -297,7 +333,7 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
     );
   }
 
-Widget _buildSelectionTile({required IconData icon, required String title, required String value, required VoidCallback onTap}) {
+Widget _buildSelectionTile({required BuildContext context, required IconData icon, required String title, required String value, required VoidCallback onTap}) {
     return Material( 
       color: Colors.transparent,
       child: InkWell(
@@ -322,7 +358,7 @@ Widget _buildSelectionTile({required IconData icon, required String title, requi
     );
   }
 
-  Widget _buildReadOnlyField(String text) {
+  Widget _buildReadOnlyField(BuildContext context, String text) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -332,9 +368,9 @@ Widget _buildSelectionTile({required IconData icon, required String title, requi
       ),
       child: Row(
         children: [
-          Icon(text.contains("Course") ? Icons.book : Icons.location_on, color: Colors.grey[700]),
+          Icon(text.contains(AppLocalizations.of(context).course) ? Icons.book : Icons.location_on, color: Colors.grey[700]),
           const SizedBox(width: 16),
-          Text(text, style: TextStyle(color: Colors.grey[800], fontWeight: FontWeight.w500)),
+          Expanded(child: Text(text, style: TextStyle(color: Colors.grey[800], fontWeight: FontWeight.w500))),
         ],
       ),
     );

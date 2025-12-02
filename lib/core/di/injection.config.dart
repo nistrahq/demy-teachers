@@ -185,6 +185,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i579.ResetPasswordUseCase>(),
       ),
     );
+    gh.factory<_i847.AttendanceReportBloc>(
+      () => attendanceModule.attendanceReportBloc(
+        gh<_i422.GetStudentsUseCase>(),
+        gh<_i773.GetAttendanceHistoryUseCase>(),
+      ),
+    );
     gh.factory<_i536.AuthBloc>(
       () => authModule.authBloc(
         gh<_i87.SignInUser>(),
