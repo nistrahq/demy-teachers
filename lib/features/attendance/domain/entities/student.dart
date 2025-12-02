@@ -11,7 +11,7 @@ class Student {
 }
 
 // Una entidad auxiliar para manejar el estado en la UI antes de enviar
-enum AttendanceStatus { present, late, absent, none }
+enum AttendanceStatus { present, absent, excused, none }
 
 class StudentAttendance {
   final Student student;
