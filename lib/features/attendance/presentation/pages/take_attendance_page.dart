@@ -1,3 +1,4 @@
+import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_bloc.dart';
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_event.dart';
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_state.dart';
@@ -16,13 +17,14 @@ class TakeAttendancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
+    final t = AppLocalizations.of(context)!;
 
     return BlocProvider(
       create: (_) => GetIt.I<AttendanceBloc>()..add(LoadStudentsEvent(classSessionId)),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
-          title: const Text('Attendance Report',
+          title: Text(t.attendanceReportTitle,
           style: TextStyle(
               color: Colors.white, 
               fontWeight: FontWeight.bold
@@ -45,9 +47,23 @@ class TakeAttendancePage extends StatelessWidget {
         body: BlocConsumer<AttendanceBloc, AttendanceState>(
           listener: (context, state) {
             if (state is AttendanceSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Asistencia guardada")));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.attendanceSavedSuccess)));
               context.pop(); // Regresar
             }
+
+            if (state is AttendanceLoaded && state.errorMessage != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.errorMessage!),
+                  backgroundColor: Colors.red, // Rojo para errores
+                )
+              );
+            }
+            if (state is AttendanceFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message), backgroundColor: Colors.red)
+                );
+                }
           },
           builder: (context, state) {
             if (state is AttendanceLoading) return const Center(child: CircularProgressIndicator());
@@ -56,23 +72,24 @@ class TakeAttendancePage extends StatelessWidget {
               return Column(
                 children: [
                   // Info Cards (Fecha, Curso) como en la imagen
-                  _buildHeaderInfo(courseName),
+                  _buildHeaderInfo(courseName, t),
                   
                   // Cabecera de la tabla (Students, A, T, J/P)
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Students", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text(t.studentsLabel, // CAMBIO
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                         // Los labels de las bolitas
                         Row(
                            children: [
-                             _StatusHeaderCircle(text: "A", color: Colors.blue), // Absent/Asistió? Ajusta colores
+                             _StatusHeaderCircle(text: t.statusPresentAbbr, color: Colors.blue), // Absent/Asistió? Ajusta colores
                              SizedBox(width: 8),
-                             _StatusHeaderCircle(text: "T", color: Colors.orange),
+                             _StatusHeaderCircle(text: t.statusExcusedAbbr, color: Colors.orange),
                              SizedBox(width: 8),
-                             _StatusHeaderCircle(text: "J", color: Colors.purple), // O 'P'
+                             _StatusHeaderCircle(text: t.statusAbsentAbbr, color: Colors.purple), // O 'P'
                            ],
                         )
                       ],
@@ -116,6 +133,9 @@ class TakeAttendancePage extends StatelessWidget {
                 ],
               );
             }
+            if (state is AttendanceFailure) {
+               return Center(child: Text("Error al cargar lista: ${state.message}"));
+               }
             return const SizedBox();
           },
         ),
@@ -123,7 +143,7 @@ class TakeAttendancePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeaderInfo(String course) {
+  Widget _buildHeaderInfo(String course, AppLocalizations t) {
     // Aquí implementas los cards blancos de arriba (Start Date, Course, etc)
     // Usa un Column con Card widgets.
     return Container(
@@ -133,7 +153,7 @@ class TakeAttendancePage extends StatelessWidget {
           // Ejemplo simplificado
           ListTile(
             leading: const Icon(Icons.book),
-            title: const Text("Course"),
+            title:Text(t.courseLabel),
             trailing: Text(course),
             tileColor: Colors.white,
           )
