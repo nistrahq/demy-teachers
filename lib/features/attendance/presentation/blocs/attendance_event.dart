@@ -3,7 +3,7 @@ import 'package:demy_teachers/features/attendance/domain/entities/student.dart';
 abstract class AttendanceEvent {}
 
 class LoadStudentsEvent extends AttendanceEvent {
-  final int classSessionId; // Lo necesitarás para guardar
+  final int classSessionId;
   LoadStudentsEvent(this.classSessionId);
 }
 

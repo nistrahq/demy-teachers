@@ -183,5 +183,6 @@
   "privacySection10Content": "Consultas de privacidad: contact.demyteam@gmail.com\n\nOficial de Protección de Datos (DPO): dpo@demy.com",
   "privacyLastUpdated": "Última actualización: Diciembre 2025",
   "byUsingDemyYouAccept": "Al usar Demy for Teachers, aceptas los",
-  "and": "y la"
+  "and": "y la",
+  "errorAttendanceAlreadyExists": "Ya existe un registro de asistencia para esta sesión y fecha."
 }

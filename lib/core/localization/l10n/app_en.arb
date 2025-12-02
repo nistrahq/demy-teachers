@@ -193,5 +193,7 @@
   "privacySection10Content": "Privacy inquiries: contact.demyteam@gmail.com\n\nData Protection Officer (DPO): dpo@demy.com",
   "privacyLastUpdated": "Last updated: December 2025",
   "byUsingDemyYouAccept": "By using Demy for Teachers, you accept the",
-  "and": "and the"
+  "and": "and the",
+  "errorAttendanceAlreadyExists": "Attendance already exists for this session and date."
 }
+

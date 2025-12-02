@@ -49,10 +49,18 @@ class TakeAttendancePage extends StatelessWidget {
             }
 
             if (state is AttendanceLoaded && state.errorMessage != null) {
+              String messageToShow = state.errorMessage!;
+
+              if (state.errorMessage!.contains("already.exists") || 
+                  state.errorMessage!.contains("Duplicate")) {
+                
+                messageToShow = t.errorAttendanceAlreadyExists;
+              }
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(state.errorMessage!),
+                  content: Text(messageToShow),
                   backgroundColor: Colors.red, 
+                  behavior: SnackBarBehavior.floating,
                 )
               );
             }

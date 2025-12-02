@@ -587,4 +587,8 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get and => 'y la';
+
+  @override
+  String get errorAttendanceAlreadyExists =>
+      'Ya existe un registro de asistencia para esta sesión y fecha.';
 }

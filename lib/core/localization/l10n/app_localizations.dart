@@ -1183,6 +1183,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'and the'**
   String get and;
+
+  /// No description provided for @errorAttendanceAlreadyExists.
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance already exists for this session and date.'**
+  String get errorAttendanceAlreadyExists;
 }
 
 class _AppLocalizationsDelegate

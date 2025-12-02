@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart'; // Opcional, si usas equatable
+import 'package:equatable/equatable.dart';
 
 abstract class AttendanceReportEvent extends Equatable {
   @override
