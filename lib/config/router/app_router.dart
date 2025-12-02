@@ -1,8 +1,4 @@
-import 'package:demy_teachers/core/di/injection.dart';
-import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_bloc.dart';
-import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_event.dart';
 import 'package:demy_teachers/features/attendance/presentation/navigation/attendance_routes.dart';
-import 'package:demy_teachers/features/attendance/presentation/pages/take_attendance_page.dart'; // Asegúrate de importar esto
 import 'package:demy_teachers/features/auth/presentation/navigation/auth_routes.dart';
 import 'package:demy_teachers/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:demy_teachers/features/auth/presentation/pages/reset_password_page.dart';

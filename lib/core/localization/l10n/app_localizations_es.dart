@@ -124,6 +124,8 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get viewAllLink => 'Ver todo >';
+
+  @override
   String get phoneNumberLabel => 'Número de teléfono';
 
   @override

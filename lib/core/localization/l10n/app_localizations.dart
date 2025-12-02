@@ -319,6 +319,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View all >'**
   String get viewAllLink;
+
   /// No description provided for @phoneNumberLabel.
   ///
   /// In en, this message translates to:
