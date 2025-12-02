@@ -4,12 +4,12 @@ import 'package:demy_teachers/core/usecases/usecase.dart';
 import 'package:demy_teachers/features/attendance/domain/entities/student.dart';
 import 'package:demy_teachers/features/attendance/domain/repositories/attendance_repository.dart';
 
-class GetStudentsUseCase implements UseCase<Either<Failure, List<Student>>, NoParams> {
+class GetStudentsUseCase implements UseCase<Either<Failure, List<Student>>,int> {
   final AttendanceRepository repository;
   GetStudentsUseCase(this.repository);
   
   @override
-  Future<Either<Failure, List<Student>>> call(NoParams params) => repository.getStudents();
+  Future<Either<Failure, List<Student>>> call(int classSessionId) => repository.getStudents(classSessionId);
 }
 
 // features/attendance/domain/usecases/register_attendance_use_case.dart
