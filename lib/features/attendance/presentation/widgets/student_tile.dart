@@ -1,9 +1,11 @@
+import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
 import 'package:demy_teachers/features/attendance/domain/entities/student.dart';
 import 'package:flutter/material.dart';
 
 class StudentAttendanceTile extends StatelessWidget {
   final StudentAttendance item;
   final Function(AttendanceStatus) onStatusChanged;
+  
 
   const StudentAttendanceTile({
     super.key, 
@@ -13,6 +15,7 @@ class StudentAttendanceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Row(
@@ -39,7 +42,7 @@ class StudentAttendanceTile extends StatelessWidget {
           
           // Asistió (Azul en imagen)
           _StatusButton(
-             text: "A", // O 'P'
+             text: t.statusPresentAbbr, // O 'P'
              color: Colors.blue,
              isSelected: item.status == AttendanceStatus.present,
              onTap: () => onStatusChanged(AttendanceStatus.present),
@@ -48,16 +51,16 @@ class StudentAttendanceTile extends StatelessWidget {
 
           // Tardanza (Naranja en imagen)
           _StatusButton(
-             text: "T",
+             text: t.statusExcusedAbbr,
              color: Colors.orange,
-             isSelected: item.status == AttendanceStatus.late,
-             onTap: () => onStatusChanged(AttendanceStatus.late),
+             isSelected: item.status == AttendanceStatus.excused,
+             onTap: () => onStatusChanged(AttendanceStatus.excused),
           ),
           const SizedBox(width: 8),
 
           // Falta (Morado en imagen)
           _StatusButton(
-             text: "F", // O 'A' de Absent
+             text: t.statusAbsentAbbr, // O 'A' de Absent
              color: Colors.purple,
              isSelected: item.status == AttendanceStatus.absent,
              onTap: () => onStatusChanged(AttendanceStatus.absent),

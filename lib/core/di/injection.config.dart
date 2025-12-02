@@ -29,10 +29,14 @@ import 'package:demy_teachers/features/attendance/data/di/attendance_module.dart
     as _i642;
 import 'package:demy_teachers/features/attendance/domain/repositories/attendance_repository.dart'
     as _i175;
+import 'package:demy_teachers/features/attendance/domain/usecases/get_attendance_history_use_case.dart'
+    as _i773;
 import 'package:demy_teachers/features/attendance/domain/usecases/get_students_use_case.dart'
     as _i422;
 import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_bloc.dart'
     as _i703;
+import 'package:demy_teachers/features/attendance/presentation/blocs/attendance_report_bloc.dart'
+    as _i847;
 import 'package:demy_teachers/features/auth/data/datasources/auth_local_data_source.dart'
     as _i883;
 import 'package:demy_teachers/features/auth/data/datasources/auth_remote_data_source.dart'
@@ -145,6 +149,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i422.RegisterAttendanceUseCase>(
       () => attendanceModule.registerAttendanceUseCase(
+        gh<_i175.AttendanceRepository>(),
+      ),
+    );
+    gh.lazySingleton<_i773.GetAttendanceHistoryUseCase>(
+      () => attendanceModule.getAttendanceHistoryUseCase(
         gh<_i175.AttendanceRepository>(),
       ),
     );

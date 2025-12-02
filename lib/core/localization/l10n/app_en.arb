@@ -24,6 +24,27 @@
     "@registerAttendanceButtonLabel": {
         "description": "Label for attendance registration button"
     },
+    "attendanceReportTitle": "Attendance Report",
+  "studentsLabel": "Students",
+  "saveAttendanceButton": "Save Attendance",
+  "attendanceSavedSuccess": "Attendance saved successfully",
+  "courseLabel": "Course",
+  "startDateLabel": "Start Date",
+  "endDateLabel": "End Date",
+  "statusPresentAbbr": "P",
+  "statusExcusedAbbr": "E",
+  "statusAbsentAbbr": "A",
+  "errorLoadingStudents": "Error loading student list: {error}",
+  "@errorLoadingStudents": {
+    "placeholders": {
+        "error": { "type": "String" }
+    }
+  },
+  "viewAttendanceReportButton": "View Attendance Report",
+  "teachingScheduleButton": "Teaching Schedule",
+  "viewNotificationsButton": "View Notifications",
+  "todayScheduleTitle": "Today Schedule",
+  "viewAllLink": "View all >"
   "phoneNumberLabel": "Phone Number",
   "resetPasswordButton": "Reset Password",
   "forgotPasswordTitle": "Forgot Password",
