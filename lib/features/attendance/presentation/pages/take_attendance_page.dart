@@ -16,7 +16,7 @@ class TakeAttendancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).colorScheme.primary;
+    final primaryColor = Theme.of(context).colorScheme.primaryContainer;
     final t = AppLocalizations.of(context)!;
 
     return BlocProvider(

@@ -182,7 +182,7 @@ class _TeachingReschedulePageState extends State<TeachingReschedulePage> {
           return Scaffold(
             appBar: AppBar(
               title: const Text('Teaching Reschedule', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-              backgroundColor: colorScheme.primary,
+              backgroundColor: colorScheme.primaryContainer,
               iconTheme: const IconThemeData(color: Colors.white),
             ),
             body: Column(

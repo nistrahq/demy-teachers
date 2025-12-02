@@ -13,7 +13,7 @@ class TeachingSchedulePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color primaryColor = Theme.of(context).colorScheme.primary;
+    final Color primaryColor = Theme.of(context).colorScheme.primaryContainer;
 
     return BlocProvider(
       create: (_) => GetIt.I<ScheduleBloc>()..add(ScheduleWeeklyScheduleRequested()),
