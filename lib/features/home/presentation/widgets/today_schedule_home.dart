@@ -1,3 +1,5 @@
+  import 'package:demy_teachers/core/localization/l10n/app_localizations.dart';
+  import 'package:demy_teachers/features/home/presentation/widgets/section_action_modal.dart';
   import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_bloc.dart';
   import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_event.dart';
   import 'package:demy_teachers/features/schedule/presentation/blocs/schedule_state.dart';
@@ -20,25 +22,36 @@
     @override
     Widget build(BuildContext context) {
       final colorScheme = Theme.of(context).colorScheme;
+      final t = AppLocalizations.of(context)!;
 
-      // Usamos el día y mes actual para simular la fecha del mockup
-      // Nota: Esto es solo para el diseño; la sesión real viene del BLoC.
+  
       final now = DateTime.now();
       final date = now.day.toString();
       final month = DateFormat('MMM', Localizations.localeOf(context).languageCode).format(now);
 
       return Padding(
         padding: const EdgeInsets.only(bottom: 12.0),
-        child: Container(
+        child: Material(
+            color: Colors.transparent, 
+            child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () {
+            // Lógica para abrir el modal
+            showModalBottomSheet(
+              context: context,
+              backgroundColor: Colors.transparent, 
+              builder: (context) => SessionActionModal(session: session),
+            );
+          },
+          child: Container(
             padding: const EdgeInsets.all(8.0), 
             decoration: BoxDecoration(
               color: colorScheme.onPrimary,
               borderRadius: BorderRadius.circular(16),
-          ),
+            ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Diseño de la Tarjeta de Fecha (similar a image_fd093a.png)
               Container(
                 width: 60,
                 height: 60, 
@@ -89,7 +102,9 @@
                 ),
               ),
             ],
+          )
           ),
+        ),
         ),
       );
     }
@@ -100,9 +115,8 @@
 
     @override
     Widget build(BuildContext context) {
-      // 1. Instanciar el BLoC y pedir los datos.
+
       return BlocProvider(
-        // Se instancia aquí para que sea independiente de la pantalla de horarios.
         create: (_) => GetIt.I<ScheduleBloc>()..add(ScheduleWeeklyScheduleRequested()),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -116,18 +130,17 @@
               }
               if (state is ScheduleLoaded) {
                 
-                // 🎯 CLAVE: Se usa SOLAMENTE la lista filtrada para hoy.
                 final sessionsToShow = state.dailySessions; 
 
                 if (sessionsToShow.isEmpty) {
                   return Center(child: Text('No hay clases programadas para hoy.'));
                 }
                 
-                // 2. Muestra la lista de sesiones del día
+                
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: sessionsToShow.map((session) {
-                    // Alternamos colores para el diseño del mockup
+                    
                     final index = sessionsToShow.indexOf(session);
                     final color = index.isEven 
                         ? Theme.of(context).colorScheme.primary 

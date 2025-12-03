@@ -1,6 +1,7 @@
 import 'package:demy_teachers/core/network/api_client.dart';
 import 'package:demy_teachers/features/schedule/data/datasources/schedule_remote_data_source.dart';
 import 'package:demy_teachers/features/schedule/data/dtos/class_session_response_dto.dart';
+import 'package:demy_teachers/features/schedule/data/dtos/reschedule_request_dto.dart';
 import 'package:demy_teachers/features/schedule/data/endpoints/schedule_endpoints.dart';
 
 
@@ -26,4 +27,13 @@ class ScheduleRemoteDataSourceImpl implements ScheduleRemoteDataSource {
     throw Exception('Invalid response format from the API.');
   }
 
+  @override
+  Future<void> rescheduleClassSession(int classSessionId, RescheduleRequestDto request) async {
+    final pathWithClassSessionId = '${ScheduleEndpoints.rescheduleClassSession}/$classSessionId';
+
+     await apiClient.put(
+      pathWithClassSessionId,
+      body: request.toJson(),
+    );
+  }
 }
